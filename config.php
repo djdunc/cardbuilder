@@ -6,7 +6,7 @@ date_default_timezone_set('GMT');
 define('ABSPATH', dirname(__FILE__).'/');
 define('UPLOADS_DIR', ABSPATH.'uploads/');
 //$folder = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
-define('BASE_URL','http://127.0.0.1/~malicias/DoC_CardBuilder/PHP/');
+define('BASE_URL','http://create.driversofchange.com/');
 define('UPLOADS_URL', BASE_URL.'uploads/');
 // ** API settings ** //
 define('BASE_API', 'http://46.137.190.201/api/');
