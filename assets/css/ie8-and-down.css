@@ -1,0 +1,17 @@
+#add-card .panel #steep{
+	position:relative;
+	z-index: 100;}
+#add-card .panel #steep p{
+	-ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+}
+#main-navigation ul li{
+    zoom: 1;
+    *display: inline;
+}
+.card-options .icon-button {
+   zoom: 1;
+   filter:alpha(opacity=40);
+}
+.card-options .icon-button:hover {
+    filter:alpha(opacity=60);
+}

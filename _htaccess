@@ -1,0 +1,10 @@
+# RewriteEngine on
+# RewriteCond $1 !^(index\.php|includes|assets|pages|robots\.txt)
+# RewriteRule ^(.*)$ /Users/malicias/Sites/DoC_CardBuilder/PHP/index.php/$1 [L]
+<IfModule mod_rewrite.c>
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+RewriteCond $1 !^(index\.php|includes|assets|pages|robots\.txt)
+RewriteRule ^(.*)$ http://127.0.0.1/~malicias/DoC_CardBuilder/PHP/index.php?page=$1 [L]
+</IfModule>
