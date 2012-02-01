@@ -1,6 +1,7 @@
 <?php
 //globals
 require_once 'config.php';
+require_once 'includes/functions.php';
 //requested page
 if(isset($_GET['do'])){ $page = $_GET['do']; }else{ $page ='home'; }
 //details of event in session, if no event id set to default
