@@ -9,8 +9,10 @@ define('UPLOADS_DIR', ABSPATH.'uploads/');
 define('BASE_URL','http://create.driversofchange.com/');
 define('UPLOADS_URL', BASE_URL.'uploads/');
 // ** API settings ** //
-define('BASE_API', 'http://46.137.190.201/api/');
+define('BASE_API', 'api.driversofchange.com/api/');
 define('ADMIN_EMAIL','alicia@gmail.com');
+define('PRIVATE_KEY', 'eb9e55feac986debc4c5db1e9162f5');
+define('SECRET','c2429b8871');
 
 //define steep category names
 $steep = array (1=>"social", 2=>"technological", 3=>"economic", 4=>"environmental", 5=>"political");
