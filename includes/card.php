@@ -4,7 +4,7 @@
 if (isset($card)){
 $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
     $comments = json_decode($comments_json);
-    var_dump($comments);
+//    var_dump($comments);
     $date = date('j F, Y \a\t g:i a',$card->ctime);
     $card_front = UPLOADS_URL.'fronts/'.$card->card_front.'.jpg';
     $card_headers = @get_headers($card_front);

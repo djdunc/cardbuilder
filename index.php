@@ -159,7 +159,7 @@ if ($_SESSION['event_name']){
                 $_SESSION['card_id'] = $card_id;
                  if (isset($card_id)) {
                     $card_json = callAPI("card/get?id=".$card_id."&include_owner=1");
-                    var_dump($card_json);
+//                    var_dump($card_json);
                     if (isset($card_json)) {$card = json_decode($card_json);}
                     if (isset($card->id)&&$card->status!='deleted') {
                         //category name
