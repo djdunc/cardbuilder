@@ -3,7 +3,7 @@ require_once ('../config.php');
 require_once ('functions.php');
 if (isset($_POST['card_id'])){
     $card_id = $_POST['card_id'];
-    $card_json = callAPI(BASE_API."card/get?id=".$card_id);
+    $card_json = callAPI("card/get?id=".$card_id);
     if (isset($card_json)) { $card = json_decode($card_json); }else{ echo("false"); die; }
 } else{
     echo("false");
