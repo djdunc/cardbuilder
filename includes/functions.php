@@ -3,9 +3,10 @@ function callAPI($query_params) {
 	$json_string = "";
     try {
     	$request = BASE_API.$query_params;
-        //create OAuth object using private key and secret
-        $oauth = new OAuth(PRIVATE_KEY, SECRET, OAUTH_SIG_METHOD_HMACSHA1);
         //parameters passed as data using array 
+        $oauth = $_SESSION['oauth'];
+        var_dump($request);
+        
         $oauth->fetch($request ,array('id'=>1), OAUTH_HTTP_METHOD_GET);
 
         //get JSON response string

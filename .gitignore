@@ -3,3 +3,5 @@ config.php
 .git
 .settings
 .project
+
+/config.php

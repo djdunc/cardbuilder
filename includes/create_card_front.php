@@ -2,7 +2,7 @@
 require_once ('../config.php');
 if (isset($_POST['card_id'])){
     $card_id = $_POST['card_id'];
-    $card_json = @file_get_contents(BASE_API."card/get?id=".$card_id);
+    $card_json = callAPI(BASE_API."card/get?id=".$card_id);
     if (isset($card_json)) { $card = json_decode($card_json); }else{ echo("false"); die; }
 } else{
     echo("false");
@@ -134,7 +134,7 @@ imagejpeg($t_im, UPLOADS_DIR.'fronts/'.$filename.'_t.jpg');
 if(file_exists(UPLOADS_DIR.'fronts/'.$card->card_front.'.jpg')) unlink(UPLOADS_DIR.'fronts/'.$card->card_front.'.jpg');
 if(file_exists(UPLOADS_DIR.'fronts/'.$card->card_front.'_t.jpg')) unlink(UPLOADS_DIR.'fronts/'.$card->card_front.'_t.jpg');
 
-$saved_card_json = file_get_contents(BASE_API."card/put?id=".$card->id.'&card_front='.$filename);
+$saved_card_json = callAPI("card/put?id=".$card->id.'&card_front='.$filename);
 $saved_card = json_decode($saved_card_json);
 echo($saved_card->card_front);
 

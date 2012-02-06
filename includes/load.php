@@ -25,19 +25,12 @@ if ($_POST) {
   }
   }
   }
-  $myURL = BASE_API.$controller.'/'.$action.'?'; 
+  $myURL = $controller.'/'.$action.'?'; 
   $myURL .= http_build_query($options,'','&');
-     //echo($myURL);
+     var_dump($myURL);
   //die;
-  // Create a stream
-  $h_opts = array(
-    'http'=>array(
-      'method'=>$action,
-      'header'=>"Accept: text/html\r\n"
-    )
-  );
-  $context = stream_context_create($h_opts);
-  $myjson = @file_get_contents($myURL,false, $context); 
+  
+  $myjson = callAPI($myURL); 
   if ($myjson!=''){
        $mydata = json_decode($myjson);
        if ($controller=='event'){

@@ -2,6 +2,8 @@
 //globals
 require_once 'config.php';
 require_once 'includes/functions.php';
+//create OAuth object using private key and secret
+$_SESSION['oauth'] = new OAuth(PRIVATE_KEY, SECRET, OAUTH_SIG_METHOD_HMACSHA1);
 //requested page
 if(isset($_GET['do'])){ $page = $_GET['do']; }else{ $page ='home'; }
 //details of event in session, if no event id set to default
@@ -10,7 +12,7 @@ if(isset($_GET['do'])){ $page = $_GET['do']; }else{ $page ='home'; }
 // }
 
 if(empty($_SESSION['event_name'])||$page=='home'){
-    $main_event_json = @file_get_contents(BASE_API."event?id=".$_SESSION['event_id']);
+    $main_event_json = callAPI("event?id=".$_SESSION['event_id']);
     if (isset($main_event_json )) { 
         $event = json_decode($main_event_json);
         if (isset($event)) { 
@@ -85,7 +87,7 @@ if ($_SESSION['event_name']){
                  }else{
                      //get all tags
                        //if (!isset($_SESSION['tags'])){
-                           $tags_json = @file_get_contents(BASE_API."tag" );
+                           $tags_json = callAPI("tag");
                            if (isset($tags_json)) { 
                                $tags = array();
                                $raw_tags = json_decode($tags_json); 
@@ -107,7 +109,7 @@ if ($_SESSION['event_name']){
                      if (isset($card_id) && $card_id!='') {
                         //do edit
                         $_SESSION['card_id'] = $card_id;
-                        $card_json = @file_get_contents(BASE_API."card/get?id=".$card_id );
+                        $card_json = callAPI("card/get?id=".$card_id );
                         if (isset($card_json)) {
                             $card = json_decode($card_json);
                             //check logged in user is owner or event admin todo add superadmin
@@ -121,7 +123,7 @@ if ($_SESSION['event_name']){
                            show_error("Sorry, the card you have requested does not exist.", "Make sure that you have the correct URL and that the owner hasn't deleted it. You can create your own card <a href=\"index.php?do=create\">here</a>.");
                         }
                         if (isset($card)) {
-                            $c_tags_json =  @file_get_contents(BASE_API."cardtags/get?card_id=".$card_id );
+                            $c_tags_json =  callAPI("cardtags/get?card_id=".$card_id );
                             if (isset($c_tags_json)) {
                                 //unset session card tags
                                 $_SESSION['c_tags'] = array();
@@ -156,9 +158,10 @@ if ($_SESSION['event_name']){
                 $_SESSION['ref_page'] = 'view';
                 $_SESSION['card_id'] = $card_id;
                  if (isset($card_id)) {
-                    $card_json = @file_get_contents(BASE_API."card/get?id=".$card_id."&include_owner=1");
+                    $card_json = callAPI("card/get?id=".$card_id."&include_owner=1");
+                    var_dump($card_json);
                     if (isset($card_json)) {$card = json_decode($card_json);}
-                    if (isset($card)&&$card->status!='deleted') {
+                    if (isset($card->id)&&$card->status!='deleted') {
                         //category name
                         //$cat_json = @file_get_contents(BASE_API."category/get?id=".$card->category_id);
                         //owner name
@@ -169,7 +172,7 @@ if ($_SESSION['event_name']){
                             //echo('no image');
                             //require_once('includes/create_card_front.php'); 
                        // } else{
-                           $c_tags_json =  @file_get_contents(BASE_API."cardtags/get?card_id=".$card_id );
+                           $c_tags_json =  callAPI("cardtags/get?card_id=".$card_id );
                            if (isset($c_tags_json)) {
                                $_SESSION['c_tags'] = array();
                                $raw_tags = json_decode($c_tags_json); 
@@ -195,7 +198,7 @@ if ($_SESSION['event_name']){
                  break;
              case 'explore':
                $_SESSION['ref_page'] = 'explore';
-               $event_cards_json = @file_get_contents(BASE_API."eventcards?event_id=".$_SESSION['event_id']);
+               $event_cards_json = callAPI("eventcards?event_id=".$_SESSION['event_id']);
                 if (isset($event_cards_json)) {$event_cards = json_decode($event_cards_json);}
                require_once('includes/header.php');
                 require_once('includes/explore.php');
@@ -210,7 +213,7 @@ if ($_SESSION['event_name']){
                        require_once('includes/login.php');
                        require_once('includes/footer.php');
                 }else{
-                    $events_json = @file_get_contents(BASE_API."event?owner=".$_SESSION['user_id']);
+                    $events_json = callAPI("event?owner=".$_SESSION['user_id']);
                     if (isset($events_json)) {
                         $events = json_decode($events_json);
                         require_once('includes/header.php');
@@ -236,9 +239,9 @@ if ($_SESSION['event_name']){
                          $edit_event_id = $_GET['edit_event'];
                      }
                      if (isset($edit_event_id)) {
-                         $edit_event_json = @file_get_contents(BASE_API."event/get?id=".$edit_event_id);
+                         $edit_event_json = callAPI("event/get?id=".$edit_event_id);
                          if (isset($edit_event_json)){$edit_event = json_decode($edit_event_json);}
-                         $event_cards_json = @file_get_contents(BASE_API."eventcards?event_id=".$edit_event_id);
+                         $event_cards_json = callAPI("eventcards?event_id=".$edit_event_id);
                          if (isset($event_cards_json)&&$event_cards_json!='[]') {$event_cards = json_decode($event_cards_json);}
                      }
                      require_once('includes/header.php');
@@ -249,7 +252,7 @@ if ($_SESSION['event_name']){
              default:
              $_SESSION['ref_page'] = "";
              //get cards for event
-             $event_cards_json = @file_get_contents(BASE_API."eventcards?event_id=".$_SESSION['event_id']);
+             $event_cards_json = callAPI("eventcards?event_id=".$_SESSION['event_id']);
              if (isset($event_cards_json)) {$event_cards = json_decode($event_cards_json);}
              //@todo: get arup cards
              require_once('includes/header.php');

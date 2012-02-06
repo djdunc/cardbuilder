@@ -15,25 +15,15 @@ if ($_POST) {
     }
   }
 }
-  $myURL = BASE_API.$controller.'/'.$action.'?'; 
+  $myURL = $controller.'/'.$action.'?'; 
   $myURL .= http_build_query($options,'','&');
-     //echo($myURL);
-  //die;
-  // Create a stream
-  $h_opts = array(
-    'http'=>array(
-      'method'=>$action,
-      'header'=>"Accept: text/html\r\n"
-    )
-  );
-  $context = stream_context_create($h_opts);
-  $myjson = @file_get_contents($myURL,false, $context); 
+  $myjson = callAPI($myURL); 
   if ($myjson!=''){
        $mydata = json_decode($myjson);
        if ($mydata->id){
            $_SESSION['user_id'] = $mydata->id;
-           $nameURL = BASE_API.'user?id='.$_SESSION['user_id']; 
-           $namejson = @file_get_contents($myURL); 
+           $nameURL = 'user?id='.$_SESSION['user_id']; 
+           $namejson = callAPI($myURL); 
            $user = json_decode($namejson);
            $_SESSION['user_name'] = $user->first_name." ".$user->last_name;
            $_SESSION['LoggedIn'] = true;
