@@ -1,13 +1,18 @@
 <link rel="stylesheet" type="text/css" href="assets/css/jquery.taghandler.css">
 <?php 
 //comments all
-$comments_json = file_get_contents(BASE_API.'cardcomments?card_id='.$card->id."&include_owner=1");
-$comments = json_decode($comments_json);
-$date = date('j F, Y \a\t g:i a',$card->ctime);
-$card_front = UPLOADS_URL.'fronts/'.$card->card_front.'.jpg';
-$card_headers = @get_headers($card_front);
-if($card_headers[0] == 'HTTP/1.1 404 Not Found') {
-    $card_front="false";
+if (isset($card)){
+$comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
+    $comments = json_decode($comments_json);
+    var_dump($comments);
+    $date = date('j F, Y \a\t g:i a',$card->ctime);
+    $card_front = UPLOADS_URL.'fronts/'.$card->card_front.'.jpg';
+    $card_headers = @get_headers($card_front);
+    if($card_headers[0] == 'HTTP/1.1 404 Not Found') {
+        $card_front="false";
+    }
+} else{
+    //@todo -- throw error
 }
 ?>
 <?php if (!isset($card)){ ?>

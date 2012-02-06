@@ -1,5 +1,6 @@
 <?php
 require_once ('../config.php');
+require_once ('functions.php');
 $card_id =  $_POST['card_id'];
 $id    = $_POST['id'];
 $value = urlencode ( $_POST['value']);
@@ -8,7 +9,7 @@ if ($_POST['controller']=='card'){
         echo('Issue required');
         die;
     }
-    $saved_card_json = file_get_contents(BASE_API."card/put?id=".$card_id.'&'.$id.'='.$value);
+    $saved_card_json = callAPI("card/put?id=".$card_id.'&'.$id.'='.$value);
     $saved_card = json_decode($saved_card_json);
     if (isset($saved_card)){
         //sucess!
@@ -19,7 +20,7 @@ if ($_POST['controller']=='card'){
         $saved_card->id." ".$card_id.$_POST; 
     }
 } elseif($_POST['controller']=='comment'){
-       $post_comment_json = file_get_contents(BASE_API."comment/post?card_id=".$card_id.'&owner='.$_SESSION['user_id'].'&'.$id.'='.$value);
+       $post_comment_json = callAPI("comment/post?card_id=".$card_id.'&owner='.$_SESSION['user_id'].'&'.$id.'='.$value);
        $comment = json_decode($post_comment_json);
        if (isset($comment)){
            //if $id="category_id"{

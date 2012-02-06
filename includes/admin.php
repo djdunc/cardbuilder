@@ -43,7 +43,7 @@
 					</thead> 
 					<tbody> 
 						<?php foreach ($events as $event){?>
-						<?php $event_cards_json = @file_get_contents(BASE_API."eventcards?event_id=".$event->id); 
+						<?php $event_cards_json = callAPI("eventcards?event_id=".$event->id); 
 						if (isset($event_cards_json)) {$event_cards = json_decode($event_cards_json);}?>
 						<tr> 
 							<td><input type="checkbox" name="checkbox" /></td> 

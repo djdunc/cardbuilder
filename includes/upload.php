@@ -1,5 +1,6 @@
 <?php
 require_once ('../config.php');
+require_once ('functions.php');
 date_default_timezone_set('GMT');
 $date = date( 'U' );  
 $card_id =  $_GET['card_id'];
@@ -29,7 +30,7 @@ if ((($_FILES['value']["type"] == "image/gif")
               //delete old image from dir
               //if(file_exists(UPLOADS_DIR.'fronts/'.$card->card_front.'.jpg')) unlink(UPLOADS_DIR.'fronts/'.$card->card_front.'.jpg');
               //save card image location on database:
-              $saved_card_json = file_get_contents(BASE_API."card/put?id=".$card_id.'&image='.$new_filename);
+              $saved_card_json = callAPI("card/put?id=".$card_id.'&image='.$new_filename);
               $saved_card = json_decode($saved_card_json);
               if (isset($saved_card)){
                   echo(UPLOADS_URL.$new_filename.'_b.jpg');

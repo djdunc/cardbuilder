@@ -1,8 +1,9 @@
 <?php 
  require_once ('../config.php');
+ require_once ('functions.php');
  $request = $_POST['username'];
- $myURL = BASE_API.'username?username='.$request;
- $myjson = @file_get_contents($myURL); 
+ $myURL = 'username?username='.$request;
+ $myjson = callAPI($myURL); 
  if ($myjson!=''){
      echo('false');
  } else {
