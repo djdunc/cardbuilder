@@ -1,5 +1,6 @@
 <?php
 require_once '../config.php';
+require_once ('functions.php');
    $new_tags = array();
    $old_tags = $_SESSION['c_tags'];
    if(isset($_POST['tags'])){

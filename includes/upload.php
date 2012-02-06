@@ -1,5 +1,6 @@
 <?php
 require_once ('../config.php');
+require_once ('functions.php');
 date_default_timezone_set('GMT');
 $date = date( 'U' );  
 $card_id =  $_GET['card_id'];
