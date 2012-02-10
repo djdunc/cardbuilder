@@ -16,17 +16,17 @@
 <!-- END SUBNAVIGATION -->
 
 <!-- BEGIN PAGE BREADCRUMBS/TITLE -->
-<div class="container_4">
-	<div id="page-heading" class="clearfix">
-	    <div class="title-crumbs">
-			<div class="page-wrap title-event">
-			    <h1><?php echo $_SESSION['event_name']; ?> cards</h1>
-			</div>
-		</div>
-	</div>
-</div>
+<!-- <div class="container_4">
+    <div id="page-heading" class="clearfix">
+        <div class="title-crumbs">
+            <div class="page-wrap title-event">
+                <h1><?php echo $_SESSION['event_name']; ?> cards</h1>
+            </div>
+        </div>
+    </div>
+</div> -->
 <!-- END PAGE BREADCRUMBS/TITLE -->
-
+<br />
 
 <div class="container_4">
     <script type="text/javascript">

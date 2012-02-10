@@ -38,9 +38,6 @@ body { -webkit-text-size-adjust:100%; min-width: 100%; }
 ------------------------------------------------------------------- */
 .hide-on-mobile { display:none !important; }
 .show-on-tablet { display:none !important; }
-#header { padding-top:30px; background-position:0 30px; }
-#main-navigation {float: none; clear: both;padding:13px 13px 0 13px; }
-.mobile-navigation { height:37px; width:100%; display:block; }
 .panel { margin-bottom:10px; }
 .panel .content,
 .panel .tabs,
@@ -51,6 +48,12 @@ body { -webkit-text-size-adjust:100%; min-width: 100%; }
 
 .title-crumbs { display:block; padding-bottom:20px }
 #page-heading .page-wrap { text-align:left; }
+#main-navigation { float: none; clear: both;}
+#main-navigation li a{
+	border-top: 1px solid #efefef;
+	height: 30px;
+	padding-top: 10px;
+}
 
 
 

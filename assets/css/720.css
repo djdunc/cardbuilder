@@ -146,9 +146,14 @@ body {
 }
 
 
-/* Admin Pro Styling
+/* Styling
 ----------------------------------------------------------------------------------------------------*/
-#logo,#main-navigation { float: none; clear: both; width: 98%;padding-top: 0;margin-right: auto;margin-left: auto;}
+#main-navigation { float: none; clear: both;}
+#main-navigation li a{
+	border-top: 1px solid #efefef;
+	height: 30px;
+	padding-top: 10px;
+}
 .hide-on-tablet { display:none !important; }
 .show-on-mobile { display:none !important; }
 #search { position:absolute; width:160px; top:45px; right:4%; }

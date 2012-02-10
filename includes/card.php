@@ -20,7 +20,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
     	<div id="page-heading" class="clearfix">
     		<div class="grid-wrap title-event">
     		<div class="grid_2 title-crumbs">
-    		    <h1 id="name" class="">Card not found</h1>
+    		    <h2 id="name" class="">Card not found</h2>
     		</div>
     	</div>
     </div>
@@ -30,7 +30,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
 	<div id="page-heading" class="clearfix">
 		<div class="grid-wrap title-event">
 		<div class="grid_2 title-crumbs">
-		    <h1 id="name" class=""><?php if (isset($card->name)){ echo $card->name;} ?></h1>
+		    <h2 id="name" class=""><?php if (isset($card->name)){ echo $card->name;} ?></h1>
 			<?php if (isset($card->category_id)){?><h2 id="category_id" class="category <?php echo $steep[$card->category_id]; ?>"><?php echo $steep[$card->category_id]; ?></h2><?php }?>
 		</div>
 		<div class="grid_2 align_right pad-h1  chi">

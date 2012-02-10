@@ -11,11 +11,15 @@ if(isset($_GET['do'])){ $page = $_GET['do']; }else{ $page ='home'; }
 //     $_SESSION['event_id'] = 1;
 // }
 
-if(empty($_SESSION['event_name'])||$page=='home'){
+if(empty($_SESSION['event_id'])||$page=='home'){
     $main_event_json = callAPI("event?id=".$_SESSION['event_id']);
     if (isset($main_event_json )) { 
         $event = json_decode($main_event_json);
+        $org_json = callAPI("organisation?id=".$event->owner);
+        $org = json_decode($org_json);
         if (isset($event)) { 
+            $_SESSION['org'] = $org->name;
+            $_SESSION['event_id'] = $event->id;
             $_SESSION['event_name'] = $event->name;
             $_SESSION['event_private']= $event->private;
             $_SESSION['event_owner'] = $event->owner;
@@ -28,9 +32,9 @@ if(empty($_SESSION['event_name'])||$page=='home'){
 //if card or create might need card id
 if(isset($_GET['card_id'])){ $card_id = $_GET['card_id']; }
 
-function show_error($h1, $body, $type="404"){
+function show_error($h2, $body, $type="404"){
     $page="error";
-    isset($h1) ? $message_h1 = $h1 :$message_h1 = "Sorry, the page you requested can't be found.";
+    isset($h2) ? $message_h2 = $h2 :$message_h2 = "Sorry, the page you requested can't be found.";
     isset($body) ? $message_body = $body :$message_body = "Tere might be a typing error in the address, or you clicked an out-of date link. You can try: <ul><li>Retype the address</li><li>Go back to the <a href=\"".BASE_URL."\">homepage</a></li></ul><small>404 error</small>";
     switch($type){
         case '503':

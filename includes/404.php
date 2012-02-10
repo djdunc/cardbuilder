@@ -3,7 +3,7 @@
 	<div id="page-heading" class="clearfix">
 	        <div class="grid-wrap">
     		<div class="grid_3 title-crumbs">
-    		       <h1><h1><?php echo $message_h1; ?></h1></h1> 
+    		       <h2><?php echo $message_h2; ?></h2> 
     		</div>
 	</div>
 </div>

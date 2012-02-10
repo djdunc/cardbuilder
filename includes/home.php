@@ -9,9 +9,7 @@ $(document).ready(function() {
 <div class="container_4">
     <div id="page-heading" class="clearfix">
     	<div class="page-wrap">
-		<h2>What will our world be like in 2050?<span class="break-l"></span> Our (need org here) imagines the future through key Drivers of Change</h2>
-		<p><?php echo nl2br($event->description) ?></p>
-		
+		<?php echo nl2br($event->description) ?>
         <p>Login to <a href="create.php">create a card</a> or <a href="explore.php">explore the cards</a> other groups have created in our galleries.</p>
     </div>
 </div>
@@ -20,7 +18,7 @@ $(document).ready(function() {
     <div class="grid-wrap">
 	<div class="grid_3b">
 		<div class="panel">
-			<h2 class="cap-static"><?php echo $event->name ?> cards</h2>
+			<h2 class="cap-static"><?php echo $event->name ?> Cards</h2>
 			<!-- Be sure you're keeping to this exact structure! -->
 			<div class="content gallery">
 				<div class="gallery-wrap">
