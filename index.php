@@ -170,7 +170,14 @@ if ($_SESSION['event_name']){
                         //$cat_json = @file_get_contents(BASE_API."category/get?id=".$card->category_id);
                         //owner name
                         $owner = $card->owner_user;
-                        $owner_name = $owner->first_name.' '.$owner->last_name;
+                        if ($owner->last_name || $owner->first_name){
+                            $owner_name = $owner->last_name;
+                            if ($owner->first_name){
+                                $owner_name = $owner->first_name.' '.$owner->last_name;
+                            }
+                        } else{
+                            $owner_name = $owner->username;
+                        }
                         //if (isset($card_json)){$cat = json_decode($cat_json)->name;}
                        // if (!isset($card->card_front)){
                             //echo('no image');

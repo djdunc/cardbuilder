@@ -96,7 +96,7 @@ $(document).ready(function() {
 	<div id="page-heading" class="clearfix">
 	        <div class="grid-wrap">
     		<div class="grid_2 title-crumbs">
-    		       <h1 id="title">Create an account</h1>
+    		       <h2 id="title">Create an account</h2>
     		</div>
     		<div class="grid_2 align_right">
     				

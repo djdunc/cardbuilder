@@ -75,7 +75,7 @@ $(document).ready(function() {
 	<div id="page-heading" class="clearfix">
 	        <div class="grid-wrap">
     		<div class="grid_2 title-crumbs">
-    		       <h1><?php if (isset($title)){echo $title;}else{echo 'Login';} ?></h1> 
+    		       <h2><?php if (isset($title)){echo $title;}else{echo 'Login';} ?></h2> 
     		</div>
     		<div class="grid_2 align_right">	
     		</div>

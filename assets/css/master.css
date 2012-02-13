@@ -53,6 +53,7 @@ small {
 button, input[type="button"], input[type="reset"], input[type="submit"] {
 	cursor: pointer;
 	-webkit-appearance: button;
+	-moz-border-radius:12px; -webkit-border-radius:12px; border-radius:12px;
 }
 
 input {
@@ -1035,14 +1036,13 @@ form.styled textarea, form.dialog input {
 	padding: 4px;
 	margin: 0;
 	color: #666;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
-	border-radius: 2px;
 	-moz-box-shadow: inset 1px 1px 4px #ddd;
 	-webkit-box-shadow: inset 1px 1px 4px #ddd;
 	box-shadow: inset 1px 1px 4px #ddd;
 }
-
+form.styled input[type=submit]{
+	-moz-border-radius:12px; -webkit-border-radius:12px; border-radius:12px;
+}
 form.styled input.readonly {
 	background: transparent;
 	border: none;
@@ -1238,7 +1238,7 @@ button {
 	cursor: pointer;
 	color:#fff !important;
 	width:auto !important;
-	font: bold 11px/11px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font: bold 11px/11px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif; 
 }
 
 button, .button { 
