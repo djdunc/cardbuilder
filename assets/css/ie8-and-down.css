@@ -4,7 +4,7 @@
 #add-card .panel #steep p{
 	-ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
 }
-#main-navigation ul li{
+ul#main-navigation li{
     zoom: 1;
     *display: inline;
 }
