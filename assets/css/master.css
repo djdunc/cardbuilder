@@ -251,6 +251,7 @@ body {
 	background: url(../images/nav_bkg.gif) no-repeat right;
 	border-bottom: 1px solid #fff;
 	font-size: 17px;
+	float: left;
 }
 #main-navigation li.last a {
 	background-image: none;
