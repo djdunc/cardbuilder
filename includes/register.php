@@ -62,6 +62,7 @@ $(document).ready(function() {
               var fields = $($("#register")[0].elements).not("#email").serialize();
           }  
            $.post('includes/load.php', action+fields, function(data) {
+               displayAlertMessage(data);
             var user = eval(jQuery.parseJSON(data));
                if(user.username){
                    window.location.href = baseurl+"index.php?do=login";

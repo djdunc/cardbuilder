@@ -611,10 +611,9 @@ table.styled .checkbox-row {
 
 table.styled .options-row {
 	text-align: center;
-	width: 130px;
-	min-width: 60px;
-	!important
-padding: 0;
+	width: 100px;
+    padding: 0;
+	white-space: nowrap;
 }
 
 table.styled .center {
@@ -716,6 +715,9 @@ div.pager .table-options {
 
 .panel table .icon-button.delete {
 	background: url('../images/admin-icons.png') no-repeat 0 0;
+}
+.panel table .icon-button.link {
+	background: url('../images/admin-icons.png') no-repeat -63px 0;
 }
 
 /* TABS																			*/

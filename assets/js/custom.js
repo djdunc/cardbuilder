@@ -59,7 +59,8 @@ $(document).ready(function() {
 		.tablesorter({headers: {0:{sorter: false},3:{sorter: false}}, widthFixed: true, widgets: ['zebra']}) 
 	    .tablesorterPager({container: $("#table-pager-2")});
 	    
-	    $(".pagesize").chosen();
+	    //$(".pagesize").chosen();
+	     $(".pagesize").chosen({ disable_search_threshold : 10 });
 	    
 	    $('.checkall').click(function(){
 	    	$(this).parents('table:eq(0)').find(':checkbox').attr('checked', this.checked);
@@ -421,6 +422,7 @@ function resizeChosenWidths(){
 		$(this).find('.chzn-drop').width(containerWidth - 2);
 		var searchWidth = $(this).find('.chzn-search').width();
 		$(this).find('.chzn-search input').width(searchWidth - 26);
+		
 	});
 }
 

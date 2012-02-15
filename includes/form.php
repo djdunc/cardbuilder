@@ -1,28 +1,17 @@
 <!-- BEGIN PAGE BREADCRUMBS/TITLE -->
 <div class="container_4">
 	<div id="page-heading" class="clearfix">
-	        <div class="grid-wrap">
+	    <div class="grid-wrap">
     		<div class="grid_2 title-crumbs">
-    		       <h1>Add event</h1>
+    		       <h2>Add event</h2>
     		</div>
     		<div class="grid_2 align_right">
     				<a href="index.php?do=admin" class="button medium">Back to Listing</a>
     		</div>
-	</div>
-</div>
+	    </div>
+    </div>
 </div>
 <!-- END PAGE BREADCRUMBS/TITLE -->
-
-<!-- BEGIN FULL WIDTH ERROR BLOCK -->
-<!-- <div class="container_4 push-down">
-    <div class="alert-wrapper warning clearfix">
-        <div class="alert-text">
-            This is a warning! You can warn users of important things with this alert style.
-            <a href="#" class="close">Close</a>
-        </div>
-    </div>
-</div> -->
-<!-- END FULL WIDTH ERROR BLOCK -->
 <div class="container_4">
 <div class="grid-wrap">
 	<!-- BEGIN FORM STYLING -->
@@ -41,7 +30,7 @@
 							<!-- Text Field -->
     						<label class="align-left" for="textField">
     							<span>Event url</span>
-    							<input class="l readonly" id="url" type="text" value="<?php if(isset($edit_event->name)){echo(BASE_URL.$edit_event->name);}?>" readonly="readonly" />
+    						    <input class="l readonly" id="url" type="text" value="<?php if(isset($edit_event->name)){echo(BASE_URL.'index.php?event='.$edit_event->id);}?>" readonly="readonly" />
     						</label>
 						
 						<!-- Text Area -->
@@ -155,15 +144,14 @@
 		<!-- END PANEL -->
 	</div>
 	<?php }?>
-</div>
+ </div>
 </div>
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/base/jquery-ui.css" type="text/css" media="all" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
 <?php if(!isset($edit_event_id)){$edit_event_id=0;} ?>
 <script type="text/javascript">
-/* <![CDATA[ */
-$(document).ready(function() {
+//<![CDATA[$(document).ready(function() {
     var formChanged = false;
     var baseurl = "<?php echo BASE_URL; ?>";
     var edit_event = <?php echo($edit_event_id);?>;
@@ -254,8 +242,7 @@ $(document).ready(function() {
       }
       return false;
     });
-    
-   });
+});
 
    function handleFormChanged() {
         $(window).bind('beforeunload', confirmNavigation);
@@ -263,7 +250,6 @@ $(document).ready(function() {
         $('#fakesave').hide();
         formChanged = true;
    }
-
    function confirmNavigation() {
         if (formChanged) {
              return ('One or more forms on this page have changed. Your changes will be lost!');
@@ -271,5 +257,4 @@ $(document).ready(function() {
              return true;
         }
    }
-    /* ]]> */
-</script>
+//]]></script>

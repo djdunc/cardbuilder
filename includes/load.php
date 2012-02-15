@@ -26,9 +26,15 @@ if ($_POST) {
   }
   }
   }
+  if ($controller=='user' && $_POST['organisation']){
+        $post_org = callAPI('organisation/post?name='.$_POST['organisation']);
+        $org = json_decode($post_org);
+        $options['organisation_id']=$org->id;
+  }
   $myURL = $controller.'/'.$action.'?'; 
   $myURL .= http_build_query($options,'','&');
-  //die;
+  echo($myURL);
+  die;
   $myjson = callAPI($myURL);
   if ($myjson!=''){
        $mydata = json_decode($myjson);

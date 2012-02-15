@@ -71,10 +71,10 @@
 	        <div class="grid_2 align_right">
 	            <div class="user_nav">
 	        <a href="<?php echo BASE_URL;?>">all events</a> | 
-    		<a href="index.php?do=admin">my events</a> | 
     		<?php if (empty($_SESSION['LoggedIn'])){?>
     		    <a href="index.php?do=login" class="signout">sign in</a>
     		<?php }else { ?>
+    		    <a href="index.php?do=admin">my events</a> | 
     		    <a href="index.php?do=logout" class="signout">sign out</a>
     		<?php } ?>
     		</div>
@@ -98,4 +98,19 @@
 	<!-- END HEADER -->
 </div>
 <!-- END CONTAINER_4 - HEADER-WRAP -->
+<?php } else{?>
+    <div id="header">
+         <div class="container_4">
+     	<div class="grid-wrap clearfix">
+     		<h1 class="grid_2"><a href="<?php echo BASE_URL;?>index.php?do=admin"><span class="org"><?php echo $_SESSION['user_org'];?></span>
+     		<?php echo $_SESSION['user_name'];?></a>
+     		</h1>
+     	    <div class="grid_2 align_right">
+    		    <!-- <ul id="main-navigation">
+    		                  <li class="last"><a href="index.php?do=admin"<?php if($page == 'admin'){ echo(" class=\"active\"");} ?>>My Events</a></li>
+    		              </ul> -->
+    		</div>
+     	</div>
+     	</div>
+     </div>
 <?php }?>

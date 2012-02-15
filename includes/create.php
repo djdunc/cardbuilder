@@ -272,9 +272,6 @@
 		    <div id="factoid"><?php if (isset($card->factoid)){ echo $card->factoid; } else{ echo'Add Factoid (5)';} ?></div>
 		    <div id="question" class="editable"><?php if (isset($card)){ echo $card->question; } else{ echo'Add Question (3)';} ?></div>
 			<img class="bkg" src="assets/images/card-bkg.gif" alt="card background" />
-			
-			
-			
 		</div>
 		<div class="panel white">
      

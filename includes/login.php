@@ -47,15 +47,14 @@ $(document).ready(function() {
           $(".buttons").append("<div id=\"indicator\"><img src=\"assets/images/indicator.gif\" /></div>")
           $.post('includes/load_login.php', action+$("#loginform").serialize(), function(data) {
                 var user = eval(jQuery.parseJSON(data));
-                if(user.username){
+                if(user.id){
                   window.location.href = baseurl+"index.php?do="+ref;
-                  //alert("index.php");
                 } else {
                    displayAlertMessage("Bad username/password combination");//todo display real json error
                    $('#login').show();
                    $('#indicator').remove();
                 }
-            }).error(function() { displayAlertMessage("Bad username/password combination"); }, "json")
+            }).error(function() { displayAlertMessage("Bad username/password combination"); $('#indicator').remove(); }, "json")
       }
       return false;
     });

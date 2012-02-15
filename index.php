@@ -15,14 +15,23 @@ if(empty($_SESSION['event_id'])||$page=='home'){
     $main_event_json = callAPI("event?id=".$_SESSION['event_id']);
     if (isset($main_event_json )) { 
         $event = json_decode($main_event_json);
-        $org_json = callAPI("organisation?id=".$event->owner);
-        $org = json_decode($org_json);
         if (isset($event)) { 
-            $_SESSION['org'] = $org->name;
             $_SESSION['event_id'] = $event->id;
             $_SESSION['event_name'] = $event->name;
             $_SESSION['event_private']= $event->private;
             $_SESSION['event_owner'] = $event->owner;
+            unset($_SESSION['org']);
+            $owner_json = callAPI('user?id='.$event->owner);
+            if (isset($owner_json)) { 
+                $owner = json_decode($owner_json);
+                if (isset($owner->organisation_id)){
+                    $org_json = callAPI("organisation?id=".$owner->organisation_id);
+                    if (isset($org_json)) { 
+                        $org = json_decode($org_json);
+                        $_SESSION['org'] = $org->name;
+                    }
+                }
+            }
         }
     } else { 
         show_error("Sorry, the event you have requested does not exist.", "Make sure that you have the correct URL and that the owner hasn't deleted it. You can register <a href=\"index.php?do=register\">here</a> to create your own event.");
@@ -262,6 +271,10 @@ if ($_SESSION['event_name']){
              break;
              default:
              $_SESSION['ref_page'] = "";
+             if(!isset($event)){
+                 $event_json = callAPI("event?id=".$_SESSION['event_id']);
+                  $event = json_decode($event_json);
+             }
              //get cards for event
              $event_cards_json = callAPI("eventcards?event_id=".$_SESSION['event_id']);
              if (isset($event_cards_json)) {$event_cards = json_decode($event_cards_json);}

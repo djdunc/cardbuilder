@@ -27,10 +27,15 @@ if ($_POST) {
            $namejson = callAPI($myURL); 
            $user = json_decode($namejson);
            $_SESSION['user_name'] = $user->first_name." ".$user->last_name;
+           if ($user->organisation_id){$org_json = callAPI('organisation?id='.$user->organisation_id);
+            $org = json_decode($org_json);
+            $_SESSION['user_org'] = $org->name;
+            }
            $_SESSION['LoggedIn'] = true;
            echo($myjson);
        }else{
-        echo 'false';
+         echo 'false';
+         die;
         } 
   }else{
         echo 'false';
