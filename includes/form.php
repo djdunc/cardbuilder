@@ -234,11 +234,10 @@
     $("#save").click(function() {
       if($("#event").valid()){
           $(window).unbind("beforeunload");
-          //alert(action+'&'+$("#event").serialize());
-                   
+          //alert(action+'&'+$("#event").serialize());    
            $.post('includes/load.php', action+'&'+$("#event").serialize(), function(data) {
                 displayAlertMessage(data);
-             }).error(function() { alert("error"); })
+             }).error(function() { alert("There was an error saving your event, please try again later."); })
       }
       return false;
     });

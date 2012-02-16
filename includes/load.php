@@ -33,8 +33,6 @@ if ($_POST) {
   }
   $myURL = $controller.'/'.$action.'?'; 
   $myURL .= http_build_query($options,'','&');
-  echo($myURL);
-  die;
   $myjson = callAPI($myURL);
   if ($myjson!=''){
        $mydata = json_decode($myjson);
