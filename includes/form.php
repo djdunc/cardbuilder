@@ -150,8 +150,8 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
 <?php if(!isset($edit_event_id)){$edit_event_id=0;} ?>
-<script type="text/javascript">
-//<![CDATA[$(document).ready(function() {
+<script type="text/javascript">//<![CDATA[
+    $(document).ready(function() {
     var formChanged = false;
     var baseurl = "<?php echo BASE_URL; ?>";
     var edit_event = <?php echo($edit_event_id);?>;
