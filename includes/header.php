@@ -87,7 +87,7 @@
 <div id="header">
     <div class="container_4">
 	<div class="grid-wrap clearfix" id="header-holder">
-		<h1 class="grid_2"><a href="<?php echo BASE_URL;?>"><span class="org"><?php echo $_SESSION['org']?></span>
+		<h1 class="grid_2"><a href="<?php echo BASE_URL;?>"><span class="org"><?php if (isset($_SESSION['org'])){echo $_SESSION['org'];}else{echo('&nbsp;');}?></span>
 		<?php echo $_SESSION['event_name']; ?></a>
 		</h1>
 	 <div class="grid_2">
