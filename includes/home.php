@@ -31,8 +31,7 @@ $(document).ready(function() {
                                     $tmp_front = ARUP_CARDS_URL.$card->card_front;
                                     $tmp_headers = @get_headers($tmp_front);
                                     if($tmp_headers[0] != 'HTTP/1.1 404 Not Found') {
-                                        $tmp_t = CroppedThumbnail($tmp_front,200,142);
-                                        $card_front = imagejpeg($tmp_t,'',500);
+                                        $card_front = showThumbnail($tmp_front,200,142);
                                     }
                                 } else{
                                     $card_front = UPLOADS_URL.'fronts/'.$card->card_front.'_t.jpg';
