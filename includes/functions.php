@@ -24,7 +24,7 @@ function callAPI($query_params) {
 function showThumbnail($imgSrc,$thumbnail_width,$thumbnail_height){
    $tmp_img = CroppedThumbnail($imgSrc,$thumbnail_width,$thumbnail_height);
    # Display the image
-   header("Content-type: image/jpeg");
+   echo header("Content-type: image/jpeg");
    echo imagejpeg($tmp_img);
 }
 /////////////////resize & crop function
