@@ -18,8 +18,9 @@
       var steep = ["social","technological","economic","environmental","political"];
       var event_id = "<?php echo $_SESSION['event_id']; ?>";
       var card_id = "<?php echo $card_id; ?>";
+      var card_owner = <?php echo $card->owner; ?>;
       function create_card_front(){
-           //alert(base_url+'includes/create_card_front.php?'+'card_id='+card_id);
+           if (card_owner!=1){
             var action = 'card_id='+card_id;
             $.post("includes/create_card_front.php", { card_id: card_id },
                function(data) {
@@ -29,6 +30,7 @@
                      togglebuttons("Problem saving card.");
                  }
                });
+            }
         }
         function togglebuttons(saving){
               $("#saving_message").html(saving);
