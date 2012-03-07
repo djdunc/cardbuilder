@@ -28,7 +28,8 @@ $(document).ready(function() {
 						foreach (array_slice($last_event_cards, 0, 24) as $card) { 
 						    if (isset($card->card_front)){
 						        if ($card->owner==1){
-                                    $card_front = ARUP_CARDS_URL.$card->card_front;
+                                    $tmp_front = ARUP_CARDS_URL.$card->card_front;
+                                    $card_front = CroppedThumbnail($tmp_front,200,142);
                                 } else{
                                     $card_front = UPLOADS_URL.'fronts/'.$card->card_front.'_t.jpg';
                                 }
