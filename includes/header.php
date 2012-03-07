@@ -86,7 +86,7 @@
 <?php if($page!='admin'&& $page!='form'){ ?>		
 <div id="header">
     <div class="container_4">
-	<div class="grid-wrap clearfix">
+	<div class="grid-wrap clearfix" id="header-holder">
 		<h1 class="grid_2"><a href="<?php echo BASE_URL;?>"><span class="org"><?php echo $_SESSION['org']?></span>
 		<?php echo $_SESSION['event_name']; ?></a>
 		</h1>
