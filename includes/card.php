@@ -154,7 +154,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
                        f_counter = flags.length;
                        $("#flag-counter").html(f_counter);
                        jQuery.each(flags, function() {
-                         if((this.owner == curr_user_id) && this.tag_id==2){
+                         if((this.owner == curr_user_id) && this.tag_id==8){
                              $(".icon-flag").addClass("full");
                              is_flagged = true;
                              return false;
@@ -177,7 +177,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
                         toggle_display(false)
                   } else if (action=='post' && data){
                       var star = eval(jQuery.parseJSON(data));
-                      if (star.tag_id==1){
+                      if (star.tag_id==7){
                            toggle_display(true)
                      }
                   } else{ alert("Error");}
@@ -197,7 +197,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
                         toggle_display(false)
                   } else if (action=='post' && data){
                       var flag = eval(jQuery.parseJSON(data));
-                      if (flag.tag_id==2){
+                      if (flag.tag_id==8){
                            toggle_display(true)
                      }
                   } else{ alert("Error");}
