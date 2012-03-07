@@ -301,10 +301,12 @@
                 <h4>3. Question</h4>
                 <p>What question illustrates the sheer impact of your issue?</p>
                 </div>
+                <?php if( isset($card) && $card->owner!=1 ){?>
                 <div id="img_info"<?php if (isset($card->image)&&$card->image!=""){ echo "class=\"completed\""; } ?>>
                 <h4>4. Image</h4>
                 <p>Upload an image, sketch or graphic to illustrate your issue or its potential consequence. (Up to 200Mb in file size. It will be cropped to fit background).</p>
                 </div>
+                <?php } ?>
                 <div id="fact_info"<?php if (isset($card->factoid)&&$card->factoid!=""){ echo "class=\"completed\""; } ?>>
                 <h4>5. Factoid</h4>
                 <p>Can you expand on the potential consequences of the issue? (in about 40 words or less)</p>
