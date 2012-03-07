@@ -6,7 +6,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
     $comments = json_decode($comments_json);
     //var_dump($card);
     $date = date('j F, Y \a\t g:i a',$card->ctime);
-    if ($card->owner_user->id==1){
+    if ($card->owner==1){
         $card_front = ARUP_CARDS_URL.$card->card_front;
         $card_back = ARUP_CARDS_URL.$card->card_back;
     } else{
