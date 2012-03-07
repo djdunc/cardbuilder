@@ -130,7 +130,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
         }
     }
     function countStars(){
-         $.post('includes/load.php', 'controller=cardtags&action=get&card_id='+card_id+'&tag_id=1', function(data) {
+         $.post('includes/load.php', 'controller=cardtags&action=get&card_id='+card_id+'&tag_id=7', function(data) {
                    var stars = jQuery.parseJSON(data);
                    if (stars.length>0){
                        s_counter = stars.length;
@@ -146,7 +146,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
           })
     }
     function countFlags(){
-         $.post('includes/load.php', 'controller=cardtags&action=get&card_id='+card_id+'&tag_id=2', function(data) {
+         $.post('includes/load.php', 'controller=cardtags&action=get&card_id='+card_id+'&tag_id=8', function(data) {
                    var flags = jQuery.parseJSON(data);
                    if (flags.length>0){
                        f_counter = flags.length;
@@ -170,7 +170,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
         }
         var action = (is_fav) ? "delete" : "post";
         $("#star-counter").html("&hellip;");
-        $.post('includes/load.php', 'controller=cardtags&action='+action+'&card_id='+card_id+'&tag_id=1&owner='+curr_user_id, function(data) {
+        $.post('includes/load.php', 'controller=cardtags&action='+action+'&card_id='+card_id+'&tag_id=7&owner='+curr_user_id, function(data) {
                   if (action=='delete' && data=='false'){
                         toggle_display(false)
                   } else if (action=='post' && data){
@@ -190,7 +190,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
         }
         var action = (is_flagged) ? "delete" : "post";
         $("#flag-counter").html("&hellip;");
-        $.post('includes/load.php', 'controller=cardtags&action='+action+'&card_id='+card_id+'&tag_id=2&owner='+curr_user_id, function(data) {
+        $.post('includes/load.php', 'controller=cardtags&action='+action+'&card_id='+card_id+'&tag_id=8&owner='+curr_user_id, function(data) {
                   if (action=='delete' && data=='false'){
                         toggle_display(false)
                   } else if (action=='post' && data){
