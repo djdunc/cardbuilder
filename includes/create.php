@@ -271,8 +271,8 @@
 	<div class="grid_3b">
 		<div id="add-card" class="panel">
 		    <?php if( isset($card) && $card->owner!=1 ){?>
-		    <div id="img" class="ajaxupload" <?php if (isset($card->image)){ echo ('style="background:#ebebeb url('.UPLOADS_URL.$card->image.'_b.jpg) no-repeat center center"><span>Wrong image? Click here to change it.</span>'); } else{echo('><span>Add Image (4)</span>'); }?></div>
-		    <?php } ?>
+		    <div id="img" class="ajaxupload" <?php if (isset($card->image)){ echo ('style="background:#ebebeb url('.UPLOADS_URL.$card->image.'_b.jpg) no-repeat center center"><span>Wrong image? Click here to change it.</span>'); } else{ echo('><span>Add Image (4)</span>'); }?></div>
+		    <?php } else{ echo('<div id="img">&nbsp;</div>'); } ?>
 		    <div id="factoid"><?php if (isset($card->factoid)){ echo $card->factoid; } else{ echo'Add Factoid (5)';} ?></div>
 		    <div id="question" class="editable"><?php if (isset($card)){ echo $card->question; } else{ echo'Add Question (3)';} ?></div>
 			<img class="bkg" src="assets/images/card-bkg.gif" alt="card background" />
@@ -306,6 +306,10 @@
                 <h4>4. Image</h4>
                 <p>Upload an image, sketch or graphic to illustrate your issue or its potential consequence. (Up to 200Mb in file size. It will be cropped to fit background).</p>
                 </div>
+                <?php } else{?>
+                 <div id="img_info" class="completed">
+                <h4>4. Image</h4>
+                <p>Arup cards have pre-created images, please edit file on cards folder.</p> 
                 <?php } ?>
                 <div id="fact_info"<?php if (isset($card->factoid)&&$card->factoid!=""){ echo "class=\"completed\""; } ?>>
                 <h4>5. Factoid</h4>
