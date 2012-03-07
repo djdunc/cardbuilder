@@ -39,16 +39,18 @@ body { -webkit-text-size-adjust:100%; min-width: 100%; }
 .hide-on-mobile { display:none !important; }
 .show-on-tablet { display:none !important; }
 .panel { margin-bottom:10px; }
-.panel .content,
-.panel .tabs,
-.panel .accordion-wrapper { display:none; }
 .page-wrap { margin:0 6%; }
 
 #search, #subpages { display:none; }
 
 .title-crumbs { display:block; padding-bottom:20px }
 #page-heading .page-wrap { text-align:left; }
-#main-navigation { float: none; clear: both;}
+
+#main-navigation {
+	position: relative;
+	padding-right: 6%;
+	padding-left: 6%;
+}
 #main-navigation li a{
 	border-top: 1px solid #efefef;
 	height: 30px;

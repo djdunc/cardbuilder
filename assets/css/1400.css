@@ -130,6 +130,9 @@
 .panel { margin-bottom:20px; }
 .show-on-mobile { display:none; }
 .show-on-tablet { display:none; }
+#main-navigation {
+	padding-right: 15px;
+}
 #search { width:348px; }
 #search form { padding:17px 17px 0 0; }
 #subpages ul { margin:0; }

@@ -148,7 +148,11 @@ body {
 
 /* Styling
 ----------------------------------------------------------------------------------------------------*/
-#main-navigation { float: none; clear: both;}
+#main-navigation {
+	position: relative;
+	padding-right: 4%;
+	padding-left: 4%;
+}
 #main-navigation li a{
 	border-top: 1px solid #efefef;
 	height: 30px;

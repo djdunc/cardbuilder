@@ -154,6 +154,10 @@ body {
 .show-on-mobile { display:none; }
 .show-on-tablet { display:none; }
 #search form { padding:17px 17px 0 0; }
+
+#main-navigation {
+	padding-right: 2%;
+}
 .break-l {
 	display: block;
 }
