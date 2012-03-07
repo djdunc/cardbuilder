@@ -26,12 +26,11 @@ $(document).ready(function() {
 					    <?php if (isset($event_cards)&&count($event_cards)>0){?>
 						<?php $last_event_cards = array_reverse($event_cards); 
 						foreach (array_slice($last_event_cards, 0, 24) as $card) { 
-						    var_dump($card);
 						    if (isset($card->card_front)){
 						        if ($card->owner==1){
                                     $card_front = ARUP_CARDS_URL.$card->card_front;
                                 } else{
-                                    $card_front = UPLOADS_URL.'fronts/'.$card->card_front.'.jpg';
+                                    $card_front = UPLOADS_URL.'fronts/'.$card->card_front.'_t.jpg';
                                 }
                                 $card_headers = @get_headers($card_front);
                                 if($card_headers[0] == 'HTTP/1.1 404 Not Found') {
