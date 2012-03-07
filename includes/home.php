@@ -26,11 +26,10 @@ $(document).ready(function() {
 					    <?php if (isset($event_cards)&&count($event_cards)>0){?>
 						<?php $last_event_cards = array_reverse($event_cards); 
 						foreach (array_slice($last_event_cards, 0, 24) as $card) { 
-						
-						
+
 						if (isset($card->card_front)){ 
 						    $card_front = UPLOADS_URL."fronts/".$card->card_front."_t.jpg";
-						    if !file_exists($card_front){
+						    if (!file_exists($card_front)){
 						        $card_front = $card->card_front;
 						    }
 						}
