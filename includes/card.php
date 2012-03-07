@@ -55,7 +55,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
 		    <div class="card">
 		   <img id="card-front" src='<?php echo $card_front; ?>' alt="<?php echo $card->name; ?> Front" />
 		   	</div>
-		   	<?php if ($isset($card_back)){ ?>
+		   	<?php if (isset($card_back)){ ?>
 		   	<div class="card">
 		   <img id="card-back" src='<?php echo $card_back; ?>' alt="<?php echo $card->name; ?> Back" />
 		   	</div>
