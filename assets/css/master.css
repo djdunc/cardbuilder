@@ -1658,7 +1658,7 @@ label.file-holder {
 	background: transparent url(../images/political.png) repeat!important;
 }
 
-#card-front {
+#card-front, #card-back {
 	width: 100%;
 }
 .card_info{
