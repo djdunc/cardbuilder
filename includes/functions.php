@@ -21,12 +21,6 @@ function callAPI($query_params) {
     }
     return 	$json_string;
 }
-function showThumbnail($imgSrc,$thumbnail_width,$thumbnail_height){
-   $tmp_img = CroppedThumbnail($imgSrc,$thumbnail_width,$thumbnail_height);
-   # Display the image
-   echo header("Content-type: image/jpeg");
-   echo imagejpeg($tmp_img);
-}
 /////////////////resize & crop function
 function CroppedThumbnail($imgSrc,$thumbnail_width,$thumbnail_height) { //$imgSrc is a FILE - Returns an image resource.
     //getting the image dimensions  

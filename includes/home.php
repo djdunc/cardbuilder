@@ -28,10 +28,14 @@ $(document).ready(function() {
 						foreach (array_slice($last_event_cards, 0, 24) as $card) { 
 						    if (isset($card->card_front)){
 						        if ($card->owner==1){
-                                    $tmp_front = ARUP_CARDS_URL.$card->card_front;
-                                    $tmp_headers = @get_headers($tmp_front);
-                                    if($tmp_headers[0] != 'HTTP/1.1 404 Not Found') {
-                                        $card_front = showThumbnail($tmp_front,200,142);
+                                    $tmp_front = substr($card->card_front, 0, -4);
+                                    $tmp_thumb = $tmp_front."_t.jpg";
+                                    echo('$tmp_thumb: '.$tmp_thumb);
+                                    $tmp_headers = @get_headers(UPLOADS_URL.'fronts/'.$tmp_thumb);
+                                    if($tmp_headers[0] == 'HTTP/1.1 404 Not Found') {
+                                        $new_thumb = CroppedThumbnail(ABSPATH.'assets/cards/'.$card->card_front,200,142);
+                                        imagejpeg($new_thumb, UPLOADS_DIR.'fronts/'.$tmp_thumb);
+                                        $card_front = UPLOADS_URL.'fronts/'.$tmp_thumb;
                                     }
                                 } else{
                                     $card_front = UPLOADS_URL.'fronts/'.$card->card_front.'_t.jpg';
