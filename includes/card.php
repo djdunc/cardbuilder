@@ -101,7 +101,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
         			<div class="content no-cap">
         			    <?php if(!empty($_SESSION['LoggedIn'])){?>
         			    <p id="message" class="edit_area"><span>Add a comment...</span></p>
-                        <?php if (isset($comments)){?><a class="all-comments">View all comments</a><?php }
+                        <?php if (isset($comments)){?><!-- <a class="all-comments">View all comments</a> --><?php }
                         }else{?>
                             <p>You must <a href="index.php?do=login">login</a> or <a href="index.php?do=register">register</a> to comment.</p>
                         <?php }?>
