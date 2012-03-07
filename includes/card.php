@@ -51,16 +51,18 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
     <div class="grid-wrap">
 	<!-- BEGIN FORM STYLING -->
 	<div class="grid_3b">
-		<div id="add-card" class="panel">
+		<div class="panel">
 		    <div class="card">
 		   <img id="card-front" src='<?php echo $card_front; ?>' alt="<?php echo $card->name; ?> Front" />
 		   	</div>
-		   	<?php if (isset($card_back)){ ?>
-		   	<div class="card">
-		   <img id="card-back" src='<?php echo $card_back; ?>' alt="<?php echo $card->name; ?> Back" />
-		   	</div>
-		   	<?php } ?>
 		</div>
+		<?php if (isset($card_back)){ ?>
+		<div class="panel">
+	   	<div class="card">
+	   <img id="card-back" src='<?php echo $card_back; ?>' alt="<?php echo $card->name; ?> Back" />
+	   	</div>
+	   	</div>
+	   	<?php } ?>
 	</div>
 	<!-- END FORM STYLING -->
     	<div class="grid_1b">
