@@ -142,7 +142,7 @@ if ($_SESSION['event_name']){
                                 $_SESSION['c_tags'] = array();
                                 $raw_tags = json_decode($c_tags_json); 
                                    foreach($raw_tags as $tag){
-                                     if (isset($_SESSION['tags'][$tag->tag_id])&&$tag->tag_id>=100){
+                                     if (isset($_SESSION['tags'][$tag->tag_id])&&$tag->tag_id>=80){
                                            $_SESSION['c_tags'][$tag->tag_id] = $_SESSION['tags'][$tag->tag_id];
                                       }
                                    }
@@ -197,7 +197,7 @@ if ($_SESSION['event_name']){
                                $_SESSION['c_tags'] = array();
                                $raw_tags = json_decode($c_tags_json); 
                                   foreach($raw_tags as $tag){
-                                    if (isset($_SESSION['tags'][$tag->tag_id])&&$tag->tag_id>=100){
+                                    if (isset($_SESSION['tags'][$tag->tag_id])&&$tag->tag_id>=80){
                                           $_SESSION['c_tags'][$tag->tag_id] = $_SESSION['tags'][$tag->tag_id];
                                      } 
                                      //todo: what if tag not in session?? 
