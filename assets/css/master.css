@@ -205,6 +205,7 @@ body {
 }
 #header-holder{
 	position: relative;
+	 min-height: 38px;
 }
 
 #header h1 {
