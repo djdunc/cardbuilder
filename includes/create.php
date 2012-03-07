@@ -270,7 +270,9 @@
 	<!-- BEGIN FORM STYLING -->
 	<div class="grid_3b">
 		<div id="add-card" class="panel">
+		    <?php if( isset($card) && $card->owner!=1 ){?>
 		    <div id="img" class="ajaxupload" <?php if (isset($card->image)){ echo ('style="background:#ebebeb url('.UPLOADS_URL.$card->image.'_b.jpg) no-repeat center center"><span>Wrong image? Click here to change it.</span>'); } else{echo('><span>Add Image (4)</span>'); }?></div>
+		    <?php } ?>
 		    <div id="factoid"><?php if (isset($card->factoid)){ echo $card->factoid; } else{ echo'Add Factoid (5)';} ?></div>
 		    <div id="question" class="editable"><?php if (isset($card)){ echo $card->question; } else{ echo'Add Question (3)';} ?></div>
 			<img class="bkg" src="assets/images/card-bkg.gif" alt="card background" />
