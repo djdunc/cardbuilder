@@ -7,7 +7,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
     //var_dump($card);
     $date = date('j F, Y \a\t g:i a',$card->ctime);
     if ($card->owner_user->id==1){
-        $card_front = ARUP_CARDS_URL.$card->card_front;
+        $card_front = ARUP_CARDS_URL.$card->card_front'.jpg';
     } else{
         $card_front = UPLOADS_URL.'fronts/'.$card->card_front.'.jpg';
         $card_headers = @get_headers($card_front);
@@ -52,7 +52,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
 	<div class="grid_3b">
 		<div id="add-card" class="panel">
 		    <div class="card">
-		   <img id="card-front" src='<?php echo UPLOADS_URL.'fronts/'.$card->card_front.'.jpg'; ?>' alt="<?php echo $card->name; ?>" />
+		   <img id="card-front" src='<?php echo $card_front; ?>' alt="<?php echo $card->name; ?>" />
 		   	</div>
 		</div>
 	</div>
