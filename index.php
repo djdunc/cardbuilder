@@ -218,7 +218,7 @@ if ($_SESSION['event_name']){
                  break;
              case 'explore':
                $_SESSION['ref_page'] = 'explore';
-               $event_cards_json = callAPI("eventcards?event_id=".$_SESSION['event_id']);
+               $event_cards_json = callAPI("card?event_id=".$_SESSION['event_id']);
                 if (isset($event_cards_json)) {$event_cards = json_decode($event_cards_json);}
                require_once('includes/header.php');
                 require_once('includes/explore.php');
@@ -261,7 +261,7 @@ if ($_SESSION['event_name']){
                      if (isset($edit_event_id)) {
                          $edit_event_json = callAPI("event/get?id=".$edit_event_id);
                          if (isset($edit_event_json)){$edit_event = json_decode($edit_event_json);}
-                         $event_cards_json = callAPI("eventcards?event_id=".$edit_event_id);
+                         $event_cards_json = callAPI("card?event_id=".$edit_event_id);
                          if (isset($event_cards_json)&&$event_cards_json!='[]') {$event_cards = json_decode($event_cards_json);}
                      }
                      require_once('includes/header.php');
@@ -276,7 +276,7 @@ if ($_SESSION['event_name']){
                   $event = json_decode($event_json);
              }
              //get cards for event
-             $event_cards_json = callAPI("eventcards?event_id=".$_SESSION['event_id']);
+             $event_cards_json = callAPI("card?event_id=".$_SESSION['event_id']);
              if (isset($event_cards_json)) {$event_cards = json_decode($event_cards_json);}
              //@todo: get arup cards
              require_once('includes/header.php');
