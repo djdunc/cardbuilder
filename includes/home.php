@@ -37,8 +37,6 @@ $(document).ready(function() {
                                    // $card_front="false";
                                 }
                             }
-						   
-						}
 						?>
 						<!-- GALLERY ITEM -->
 						<div class="gallery-item">
