@@ -25,10 +25,19 @@ $(document).ready(function() {
 					<div class="gallery-pager">
 					    <?php if (isset($event_cards)&&count($event_cards)>0){?>
 						<?php $last_event_cards = array_reverse($event_cards); 
-						foreach (array_slice($last_event_cards, 0, 24) as $card) { ?>
+						foreach (array_slice($last_event_cards, 0, 24) as $card) { 
+						
+						
+						if (isset($card->card_front)){ 
+						    $card_front = UPLOADS_URL."fronts/".$card->card_front."_t.jpg";
+						    if !file_exists($card_front){
+						        $card_front = $card->card_front;
+						    }
+						}
+						?>
 						<!-- GALLERY ITEM -->
 						<div class="gallery-item">
-							<a class="clue" title="<?php echo $card->name; ?>" href="index.php?do=view&card_id=<?php echo $card->id ?>"><img src="<?php if (isset($card->card_front)){ echo (UPLOADS_URL."fronts/".$card->card_front."_t.jpg");}?>" alt="" /></a>
+							<a class="clue" title="<?php echo $card->name; ?>" href="index.php?do=view&card_id=<?php echo $card->id ?>"><img src="<?php echo $card_front; ?>" alt="" /></a>
 						</div>
 						<!-- END GALLERY ITEM -->
 						<?php unset($card); } ?>
