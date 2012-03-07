@@ -4,12 +4,16 @@
 if (isset($card)){
 $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
     $comments = json_decode($comments_json);
-//    var_dump($comments);
+    //var_dump($card);
     $date = date('j F, Y \a\t g:i a',$card->ctime);
-    $card_front = UPLOADS_URL.'fronts/'.$card->card_front.'.jpg';
-    $card_headers = @get_headers($card_front);
-    if($card_headers[0] == 'HTTP/1.1 404 Not Found') {
-        $card_front="false";
+    if ($card->owner_user->id==1){
+        $card_front = ARUP_CARDS_URL.$card->card_front;
+    } else{
+        $card_front = UPLOADS_URL.'fronts/'.$card->card_front.'.jpg';
+        $card_headers = @get_headers($card_front);
+        if($card_headers[0] == 'HTTP/1.1 404 Not Found') {
+            $card_front="false";
+        }
     }
 } else{
     //@todo -- throw error
