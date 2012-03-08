@@ -18,9 +18,9 @@
       var steep = ["social","technological","economic","environmental","political"];
       var event_id = "<?php echo $_SESSION['event_id']; ?>";
       var card_id = "<?php echo $card_id; ?>";
-      var card_owner = <?php echo $card->owner; ?>;
+      var card_owner = '<?php if (isset($card->owner)){ echo ($card->owner); } else{ echo(''); } ?>';
       function create_card_front(){
-           if (card_owner!=1){
+           if (card_owner!='1'){
             var action = 'card_id='+card_id;
             $.post("includes/create_card_front.php", { card_id: card_id },
                function(data) {
@@ -212,7 +212,7 @@
                                       }).error(function() { alert("error"); }) 
                              }
                           },
-                          "cancel":function(){ window.location.href = base_url; return false;}
+                          "cancel": function(){ window.location.href=base_url; return false;}
                      }
        });
       $( "#radio" ).buttonset();
