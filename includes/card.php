@@ -174,11 +174,11 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
         $("#star-counter").html("&hellip;");
         $.post('includes/load.php', 'controller=cardtags&action='+action+'&card_id='+card_id+'&tag_id=7&owner='+curr_user_id, function(data) {
                   if (action=='delete' && data=='false'){
-                        toggle_display(false)
+                        toggle_display(false);
                   } else if (action=='post' && data){
                       var star = eval(jQuery.parseJSON(data));
                       if (star.tag_id==7){
-                           toggle_display(true)
+                           toggle_display(true);
                      }
                   } else{ alert("Error");}
                 }).error(function() { alert("Error"); })
@@ -194,11 +194,11 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
         $("#flag-counter").html("&hellip;");
         $.post('includes/load.php', 'controller=cardtags&action='+action+'&card_id='+card_id+'&tag_id=8&owner='+curr_user_id, function(data) {
                   if (action=='delete' && data=='false'){
-                        toggle_display(false)
+                        toggle_display(false);
                   } else if (action=='post' && data){
                       var flag = eval(jQuery.parseJSON(data));
                       if (flag.tag_id==8){
-                           toggle_display(true)
+                           toggle_display(true);
                      }
                   } else{ alert("Error");}
                 }).error(function() { alert("Error"); })
