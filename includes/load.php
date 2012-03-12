@@ -31,6 +31,13 @@ if ($_POST) {
         $org = json_decode($post_org);
         $options['organisation_id']=$org->id;
   }
+if($action=='post'||$action=='put'||$action=='delete') {
+  if(!is('user')) {
+  //must be logged in for POST|PUT|DELETE
+      echo "Not logged in; can't POST|PUT|DELETE";
+      die;
+	}
+}
   $myURL = $controller.'/'.$action.'?'; 
   $myURL .= http_build_query($options,'','&');
   $myjson = callAPI($myURL);
