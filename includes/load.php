@@ -33,7 +33,7 @@ if ($_POST) {
   }
 if($action=='post'||$action=='put'||$action=='delete') {
   if(!is('user')) {
-  //must be logged in for POST|PUT|DELETE
+      //must be logged in for POST|PUT|DELETE
       echo "Not logged in; can't POST|PUT|DELETE";
       die;
 	}
