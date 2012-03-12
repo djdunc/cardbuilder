@@ -58,7 +58,7 @@ function show_error($h2, $body, $type="404"){
 }
 if ($_SESSION['event_name']){
 	//we have event, safe to display any page
-    if ($_SESSION['event_private'] && empty($_SESSION['LoggedIn'])){
+    if ($_SESSION['event_private'] && empty($_SESSION['user'])){
         //do login
 		$title = "Private event, you must login to access contents";
 		require_once('includes/header.php');
@@ -68,8 +68,7 @@ if ($_SESSION['event_name']){
         //do required page
         switch($page){
             case 'logout':
-                $_SESSION['LoggedIn']=NULL;
-                 $_SESSION['user_id']=NULL;
+                 $_SESSION['user']=NULL;
                  $_SESSION['user_name']=NULL;
                 //back to homepage
                 header("Location: index.php"); 
@@ -92,7 +91,7 @@ if ($_SESSION['event_name']){
              case 'create':
                   $_SESSION['ref_page'] = 'create';
                  //user must always login to create
-                 if(empty($_SESSION['LoggedIn'])){
+                 if(empty($_SESSION['user'])){
                      //do login
                        require_once('includes/header.php');
                        require_once('includes/login.php');
@@ -126,7 +125,7 @@ if ($_SESSION['event_name']){
                         if (isset($card_json)) {
                             $card = json_decode($card_json);
                             //check logged in user is owner or event admin todo add superadmin
-                            if ($card->owner!=$_SESSION['user_id'] && $_SESSION['user_id']!=$_SESSION['event_owner']){
+                            if ($card->owner!=$_SESSION['user']->id && $_SESSION['user']->id!=$_SESSION['event_owner']){
                                 //404 error
                                 show_error("Sorry, only the card owner can edit this card.","You can create your own card <a href=\"index.php?do=create\">here</a>.");
                                 die;
@@ -227,13 +226,13 @@ if ($_SESSION['event_name']){
              case 'admin':
                  $_SESSION['ref_page'] = 'admin';
                 //user must always login for admin and be an admin too (@todo)
-                 if(empty($_SESSION['LoggedIn'])){
+                 if(empty($_SESSION['user'])){
                      //do login 
                        require_once('includes/header.php');
                        require_once('includes/login.php');
                        require_once('includes/footer.php');
                 }else{
-                    $events_json = callAPI("event?owner=".$_SESSION['user_id']);
+                    $events_json = callAPI("event?owner=".$_SESSION['user']->id);
                     if (isset($events_json)) {
                         $events = json_decode($events_json);
                         require_once('includes/header.php');
@@ -249,7 +248,7 @@ if ($_SESSION['event_name']){
              case 'form':
              $_SESSION['ref_page'] = 'admin';
              //user must always login for admin and be an admin too (@todo)
-              if(empty($_SESSION['LoggedIn'])){
+              if(empty($_SESSION['user'])){
                    //do login 
                      require_once('includes/header.php');
                      require_once('includes/login.php');

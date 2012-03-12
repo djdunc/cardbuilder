@@ -14,7 +14,7 @@
  <script type="text/javascript">
       /* <![CDATA[ */
       var base_url = "<?php echo BASE_URL;?>";
-      var owner_id = "<?php echo $_SESSION['user_id'];?>";
+      var owner_id = "<?php echo $_SESSION['user']->id;?>";
       var steep = ["social","technological","economic","environmental","political"];
       var event_id = "<?php echo $_SESSION['event_id']; ?>";
       var card_id = "<?php echo $card_id; ?>";

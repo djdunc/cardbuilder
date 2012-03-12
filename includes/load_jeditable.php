@@ -20,7 +20,7 @@ if ($_POST['controller']=='card'){
         $saved_card->id." ".$card_id.$_POST; 
     }
 } elseif($_POST['controller']=='comment'){
-       $post_comment_json = callAPI("comment/post?card_id=".$card_id.'&owner='.$_SESSION['user_id'].'&'.$id.'='.$value);
+       $post_comment_json = callAPI("comment/post?card_id=".$card_id.'&owner='.$_SESSION['user']->id.'&'.$id.'='.$value);
        $comment = json_decode($post_comment_json);
        if (isset($comment)){
            //if $id="category_id"{

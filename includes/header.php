@@ -71,7 +71,7 @@
 	        <div class="grid_2 align_right">
 	            <div class="user_nav">
 	        <a href="<?php echo BASE_URL;?>">all events</a> | 
-    		<?php if (empty($_SESSION['LoggedIn'])){?>
+    		<?php if (empty($_SESSION['user'])){?>
     		    <a href="index.php?do=login" class="signout">sign in</a>
     		<?php }else { ?>
     		    <a href="index.php?do=admin">my events</a> | 

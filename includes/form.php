@@ -155,7 +155,7 @@
     var formChanged = false;
     var baseurl = "<?php echo BASE_URL; ?>";
     var edit_event = <?php echo($edit_event_id);?>;
-    var owner = <?php echo $_SESSION['user_id'];?>;
+    var owner = <?php echo $_SESSION['user']->id;?>;
     //setup datepickers
 	$( "#startpicker" ).datepicker({
 	  dateFormat: 'dd/mm/yy',

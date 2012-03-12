@@ -39,7 +39,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
 			<?php if (isset($card->category_id)){?><h2 id="category_id" class="category <?php echo $steep[$card->category_id]; ?>"><?php echo $steep[$card->category_id]; ?></h2><?php }?>
 		</div>
 		<div class="grid_2 align_right pad-h1  chi">
-			<?php if ((isset($_SESSION['user_id']) && $card->owner==$_SESSION['user_id']) || (isset($_SESSION['user_id']) && $_SESSION['user_id']==$_SESSION['event_owner']) ){?><a href="index.php?do=create&card_id=<?php echo $card->id ?>" class="button blue small">Edit card</a><?php }?>
+			<?php if ((isset($_SESSION['user']->id) && $card->owner==$_SESSION['user']->id) || (isset($_SESSION['user']->id) && $_SESSION['user']->id==$_SESSION['event_owner']) ){?><a href="index.php?do=create&card_id=<?php echo $card->id ?>" class="button blue small">Edit card</a><?php }?>
 		</div>
 	</div>
 	
@@ -72,7 +72,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
     			    on <?php echo $date ?>.</p>
     			    <div class="card-options">
     			        <!-- <div class="favorite-bar"><span class="progress-icon">34</span><div class="progress-bar"><div class="bar white" style="width:30%">30 Percent</div></div></div> -->
-    			        <?php if($_SESSION['user_id']){?><a class="icon-button icon-favorite" href="" title="Add to favorites">Add to Favorites</a><span class="counter" id="star-counter">&hellip;</span> <a class="icon-button icon-comment" href="#">Add Comment</a><span class="counter" id="comment-counter"><?php echo count($comments);?></span> <a class="icon-button icon-flag" href="#" title="Report as inappropriate">Report</a><span class="counter" id="flag-counter">&hellip;</span><?php }else{?><p class="icon-button icon-favorite" href="" title="Add to favorites">Favorites</p><span class="counter" id="star-counter">&hellip;</span> <p class="icon-button icon-comment" href="#"> Comments</p><span class="counter" id="comment-counter"><?php echo count($comments);?></span> <p class="icon-button icon-flag" href="#" title="Report">Report</p><span class="counter" id="flag-counter">&hellip;</span><?php }?>&nbsp;&nbsp;<a class="icon-button icon-send" href="mailto:?subject=<?php echo $card->question; ?>&amp;body=Drivers of Change: <?php echo $card->name; ?>">Share</a>
+    			        <?php if($_SESSION['user']->id){?><a class="icon-button icon-favorite" href="" title="Add to favorites">Add to Favorites</a><span class="counter" id="star-counter">&hellip;</span> <a class="icon-button icon-comment" href="#">Add Comment</a><span class="counter" id="comment-counter"><?php echo count($comments);?></span> <a class="icon-button icon-flag" href="#" title="Report as inappropriate">Report</a><span class="counter" id="flag-counter">&hellip;</span><?php }else{?><p class="icon-button icon-favorite" href="" title="Add to favorites">Favorites</p><span class="counter" id="star-counter">&hellip;</span> <p class="icon-button icon-comment" href="#"> Comments</p><span class="counter" id="comment-counter"><?php echo count($comments);?></span> <p class="icon-button icon-flag" href="#" title="Report">Report</p><span class="counter" id="flag-counter">&hellip;</span><?php }?>&nbsp;&nbsp;<a class="icon-button icon-send" href="mailto:?subject=<?php echo $card->question; ?>&amp;body=Drivers of Change: <?php echo $card->name; ?>">Share</a>
     			    </div>
     			</div>
     		</div>
@@ -99,7 +99,7 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
                        <?php unset($comment);unset($com_owner_name); } }?>
         			</div>
         			<div class="content no-cap">
-        			    <?php if(!empty($_SESSION['LoggedIn'])){?>
+        			    <?php if(!empty($_SESSION['user'])){?>
         			    <p id="message" class="edit_area"><span>Add a comment...</span></p>
                         <?php if (isset($comments)){?><!-- <a class="all-comments">View all comments</a> --><?php }
                         }else{?>
@@ -119,8 +119,8 @@ $comments_json = callAPI('cardcomments?card_id='.$card->id."&include_owner=1");
     var uploads_url = "<?php echo UPLOADS_URL;?>";
     var card_front = "<?php echo $card_front;?>";
     var card_id = "<?php echo $card_id; ?>";
-    var curr_user_id = "<?php if(isset($_SESSION['user_id'])){ echo $_SESSION['user_id']; }else{ echo (''); }?>";
-    var curr_user = "<?php if(isset($_SESSION['user_id'])){ echo $_SESSION['user_name'];} else{ echo(''); }?>";
+    var curr_user_id = "<?php if(isset($_SESSION['user']->id)){ echo $_SESSION['user']->id; }else{ echo (''); }?>";
+    var curr_user = "<?php if(isset($_SESSION['user']->id)){ echo $_SESSION['user_name'];} else{ echo(''); }?>";
     var c_counter = parseInt("<?php echo count($comments);?>");
     var s_counter = 0;
     var f_counter = 0;

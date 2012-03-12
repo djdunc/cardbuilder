@@ -46,14 +46,14 @@ $(document).ready(function() {
           $('#login').hide();
           $(".buttons").append("<div id=\"indicator\"><img src=\"assets/images/indicator.gif\" /></div>")
           $.post('includes/load_login.php', action+$("#loginform").serialize(), function(data) {
-                var user = eval(jQuery.parseJSON(data));
-                if(user.id){
-                  window.location.href = baseurl+"index.php?do="+ref;
-                } else {
-                   displayAlertMessage("Bad username/password combination");//todo display real json error
-                   $('#login').show();
-                   $('#indicator').remove();
-                }
+                try {
+                      var user = jQuery.parseJSON(data);
+                      window.location.href = baseurl+"index.php?"+ref;
+                  } catch (err) {
+                	  displayAlertMessage(data);//todo display real json error
+                      $('#login').show();
+                      $('#indicator').remove();
+                  }
             }).error(function() { displayAlertMessage("Bad username/password combination"); $('#indicator').remove(); }, "json")
       }
       return false;
