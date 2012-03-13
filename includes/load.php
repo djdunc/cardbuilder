@@ -31,8 +31,8 @@ if ($_POST) {
         $org = json_decode($post_org);
         $options['organisation_id']=$org->id;
   }
-if($controller!='user' && ($action=='post'||$action=='put'||$action=='delete')) {
-  if(!is('user')) {
+if( $action=='post'||$action=='put'||$action=='delete' ) {
+  if(!is('user') && $controller!='user') {
       //must be logged in for POST|PUT|DELETE
       echo "Not logged in; can't POST|PUT|DELETE";
       die;
