@@ -14,18 +14,18 @@ if ($_POST) {
 }
 
 $myURL = $controller.'/'.$action; 
-$user = callAPI($myURL, $options, 'obj');
+$userobj = callAPI($myURL, $options, 'obj');
 
-if($user && is_object($user) && $user->id) {
-    $_SESSION['user'] = $user;
-    $_SESSION['user_name'] = $user->first_name." ".$user->last_name;
-    if ($user->organisation_id){$org_json = callAPI('organisation?id='.$user->organisation_id);
+if($userobj && is_object($userobj) && $user->id) {
+    $_SESSION['user'] = $userobj;
+    $_SESSION['user_name'] = $userobj->first_name." ".$userobj->last_name;
+    if ($userobj->organisation_id){$org_json = callAPI('organisation?id='.$userobj->organisation_id);
         $org = json_decode($org_json);
         $_SESSION['user_org'] = $org->name;
     }
-    echo(json_encode($user));
+    echo(json_encode($userobj));
 } else {
-    echo $user;
+    echo $userobj;
     die;
 }
   
