@@ -243,7 +243,7 @@ if ($_SESSION['event_name']){
                         $params = 'include_owner=true&include_card_count=true&type=1';
                         if(!is('super')) $params .= '&owner='.$_SESSION['user']->id;
                     
-                        var_dump($params);
+                        //var_dump($params);
                 	    $events_json = callAPI("event?".$params);
                     
                         //$events_json = callAPI("event?type=1");
