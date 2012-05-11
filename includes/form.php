@@ -164,7 +164,7 @@
         var date = picker.datepicker('getDate');
         var epoch = date.valueOf() / 1000;
         altField.val(epoch);
-        alert(altField.val());
+        //alert(altField.val());
     }
 	$( "#startpicker" ).datepicker({
 	  dateFormat: 'dd/mm/yy',
