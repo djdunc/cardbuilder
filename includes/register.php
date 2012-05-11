@@ -3,7 +3,7 @@
 /* <![CDATA[ */
 var formChanged = false;
 var baseurl = "<?php echo BASE_URL; ?>";
-var action = 'controller=user&action=post&';
+var action = 'controller=user&action=post&group_id=3';
 $(document).ready(function() {
     
     var validator = $("#register").validate({ 
@@ -14,7 +14,7 @@ $(document).ready(function() {
                 required: true, 
                  remote: {
                      url:baseurl+'includes/username_unique.php',
-                     type: 'post',
+                     type: 'post'
                  }
             },
             password: { 
@@ -39,8 +39,7 @@ $(document).ready(function() {
      				required: "Username is required",
      				remote: jQuery.validator.format("{0} is already taken, please enter a different username.")	
      			}
-    },
-           // debug:true
+    }
      
      
     });
@@ -162,7 +161,7 @@ $(document).ready(function() {
 							<span>Organisation</span>
 							<input class="textbox m editable" name="organisation" id="organisation" type="text" value="" />
 						</label>
-						<input type="hidden" name="group_id" value="1" />
+						<input type="hidden" name="group_id" value="3" />
 							<!-- Tick box -->
     					<div class="non-label-section">
     						    <p class="check-pair">
@@ -187,10 +186,10 @@ $(document).ready(function() {
 	<!-- END FORM STYLING -->
 	<div class="grid_1">
 		<div class="panel">
-		    <h2 class="cap">Lorem Ipsum</h2>
+		    <h2 class="cap">Notes</h2>
 		    	<div class="content">
 		    	    <p><strong class="red">*</strong> Indicates required fields</p>
-    				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    				<p></p>
     			</div>
 		</div>
 	</div>

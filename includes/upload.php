@@ -49,6 +49,6 @@ if ((($_FILES['value']["type"] == "image/gif")
           
 } else {			
 //print "No file has been uploaded.";
-	return die ("Please upload a valid gif, jpg or png under 200Kb");
+	return die ("Please upload a valid gif, jpg or png under 2MB");
 	//die();
 } 

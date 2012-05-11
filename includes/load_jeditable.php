@@ -4,9 +4,16 @@ require_once ('functions.php');
 $card_id =  $_POST['card_id'];
 $id    = $_POST['id'];
 $value = urlencode ( $_POST['value']);
+if (isset($_POST['orig'])){$orig = $_POST['orig'];}else{$orig='';};
+if(!is('user')) {
+  //must be logged in for POST|PUT|DELETE
+  echo "Not logged in; can't POST|PUT|DELETE";
+  die;
+}
+
 if ($_POST['controller']=='card'){
     if ($id == 'name' && $value==''){
-        echo('Issue required');
+        echo($orig);
         die;
     }
     $saved_card_json = callAPI("card/put?id=".$card_id.'&'.$id.'='.$value);

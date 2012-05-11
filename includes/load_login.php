@@ -16,7 +16,7 @@ if ($_POST) {
 $myURL = $controller.'/'.$action; 
 $userobj = callAPI($myURL, $options, 'obj');
 
-if($userobj && is_object($userobj) && $user->id) {
+if($userobj && is_object($userobj) && $userobj->id) {
     $_SESSION['user'] = $userobj;
     $_SESSION['user_name'] = $userobj->first_name." ".$userobj->last_name;
     if ($userobj->organisation_id){$org_json = callAPI('organisation?id='.$userobj->organisation_id);

@@ -38,7 +38,7 @@
 							<span>Event description</span>
 							<textarea class="textarea l editable" name="description" id="description" rows="2" cols="1"><?php if(isset($edit_event)){echo($edit_event->description);}?></textarea>
 						</label>
-						<!-- Text Area -->
+						<!-- date -->
 						<label class="align-left" for="startpicker">
 							<span>Date from<strong class="red">*</strong></span>
 							<input type="text" id="startpicker" value="" class="editable" />
@@ -79,8 +79,7 @@
 						
 						<!-- Buttons -->
 						<div class="non-label-section">
-						    <p class="button medium disabled" id="fakesave">Save</p>
-						    <input type="button" id="save" class="button medium blue" value="Save" style="display:none" />
+						    <input type="button" id="save" class="button medium blue" value="Save" />
 							<a href="index.php?do=admin" class="button medium">Cancel</a>
 						</div>
 					
@@ -149,6 +148,10 @@
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/base/jquery-ui.css" type="text/css" media="all" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
+<!--	Load the "Chosen" stylesheet. -->
+<link rel="stylesheet" href="assets/js/chosen/chosen.css" type="text/css" media="screen" />
+<!--	Load the Chosen script.-->
+<script src="assets/js/chosen/chosen.jquery.js" type="text/javascript"></script>
 <?php if(!isset($edit_event_id)){$edit_event_id=0;} ?>
 <script type="text/javascript">//<![CDATA[
     $(document).ready(function() {
@@ -157,39 +160,58 @@
     var edit_event = <?php echo($edit_event_id);?>;
     var owner = <?php echo $_SESSION['user']->id;?>;
     //setup datepickers
+    function milsToSecs(picker, altField){
+        var date = picker.datepicker('getDate');
+        var epoch = date.valueOf() / 1000;
+        altField.val(epoch);
+        alert(altField.val());
+    }
 	$( "#startpicker" ).datepicker({
 	  dateFormat: 'dd/mm/yy',
       altField: '#start',
-      altFormat: '@'
+      altFormat: '@',
+      onSelect: function(dateText, inst) {
+          milsToSecs($(this),$('#start'));
+          handleFormChanged();
+          }
     });
     $( "#endpicker" ).datepicker({
       dateFormat: 'dd/mm/yy',
       altField: '#end',
       beforeShow: customRange,
-      altFormat: '@'
+      altFormat: '@',
+      onSelect: function(dateText, inst) {
+         milsToSecs($(this),$('#end'));
+         handleFormChanged();
+        }
     });
-    //start second one always from first date
-    function customRange(a) {  
-        var b = new Date();  
-        var c = new Date(b.getFullYear(), b.getMonth(), b.getDate());  
-        if (a.id == 'endpicker') {  
-            if ($('#startpicker').datepicker('getDate') != null) {  
-                c = $('#startpicker').datepicker('getDate');  
-            }  
-        }  
-        return {  
-            minDate: c  
-        }  
+    function customRange(a) {//start second one always from first date
+        var b = new Date();
+        var c = new Date(b.getFullYear(), b.getMonth(), b.getDate());
+        if (a.id == 'endpicker') {
+            if ($('#startpicker').datepicker('getDate') != null) {
+                c = $('#startpicker').datepicker('getDate');
+            }
+        }
+        return {
+            minDate: c
+        }
     }
     //if adding event edit_event == 0
     if (edit_event != 0){
         var action = 'controller=event&action=put&id='+edit_event;
-        var dstart = $.datepicker.parseDate('@', '<?php if(isset($edit_event)){echo($edit_event->start);}?>000');
-        var dend = $.datepicker.parseDate('@', '<?php if(isset($edit_event)){echo($edit_event->end);}?>000');
-        $('#startpicker').datepicker('setDate', dstart);
-        $('#endpicker').datepicker('setDate', dend);
+        var dstart = '<?php if(isset($edit_event)){echo($edit_event->start);}?>';
+        var dend = '<?php if(isset($edit_event)){echo($edit_event->end);}?>';
+        if (dstart!='0'&&dstart!=''){
+            $('#startpicker').datepicker('setDate', $.datepicker.parseDate('@',dstart+'000'));
+            $('#start').val(dstart);
+        }
+        if (dend!='0'&&dend!=''){
+            $('#endpicker').datepicker('setDate', $.datepicker.parseDate('@',dend+'000'));
+            $('#end').val(dend);
+        }
     } else{
-        var action = 'controller=event&action=post&owner='+owner;
+        var action = 'controller=event&action=post&eventtype=1&owner='+owner;
         $('#startpicker').datepicker('setDate', new Date());
     }
     
@@ -211,6 +233,14 @@
     //if something is edited, show save button, and display alert on page leave
 
     $('#event .editable').bind('change paste', function() {
+         handleFormChanged();
+    });
+    $('#startpicker').bind('change paste', function() {
+         milsToSecs($(this),$('#start'));
+         handleFormChanged();
+    });
+    $('#endpicker').bind('change paste', function() {
+         milsToSecs($(this),$('#end'));
          handleFormChanged();
     });
     
@@ -245,8 +275,6 @@
 
    function handleFormChanged() {
         $(window).bind('beforeunload', confirmNavigation);
-        $('#save').show();
-        $('#fakesave').hide();
         formChanged = true;
    }
    function confirmNavigation() {

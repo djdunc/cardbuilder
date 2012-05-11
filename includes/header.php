@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
- <title><?php echo ( isset($event) ? $event->name." |  " : ""); ?>Drivers of Change</title>
+ <title><?php echo ( isset($_SESSION['event_name']) ? $_SESSION['event_name']." |  " : ""); ?>Drivers of Change</title>
 <link rel="shortcut icon" id="favicon" type="image/png" href="assets/images/favicon.png" />
 <!-- Apple iOS Web App Settings -->
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
@@ -73,8 +73,9 @@
 	        <a href="<?php echo BASE_URL;?>">all events</a> | 
     		<?php if (empty($_SESSION['user'])){?>
     		    <a href="index.php?do=login" class="signout">sign in</a>
-    		<?php }else { ?>
-    		    <a href="index.php?do=admin">my events</a> | 
+    		<?php }else { 
+    		   if(is('admin')){
+    		?><a href="index.php?do=admin">my events</a> | <?php } ?>
     		    <a href="index.php?do=logout" class="signout">sign out</a>
     		<?php } ?>
     		</div>

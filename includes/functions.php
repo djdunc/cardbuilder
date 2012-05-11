@@ -144,6 +144,7 @@ function get_name($owner) {
 	
     return $name;
 }
+
 /////////////////resize & crop function
 function CroppedThumbnail($imgSrc,$thumbnail_width,$thumbnail_height) { //$imgSrc is a FILE - Returns an image resource.
     //getting the image dimensions  
@@ -172,4 +173,129 @@ function CroppedThumbnail($imgSrc,$thumbnail_width,$thumbnail_height) { //$imgSr
     imagedestroy($myImage);
     return $thumb;
 }
+/////////////////resize to max width and height
+function resize_image_max($imgSrc,$max_width,$max_height) {
+    $image = imagecreatefromjpeg($imgSrc);
+    $w = imagesx($image); //current width
+    $h = imagesy($image); //current height
+    if ((!$w) || (!$h)) { $GLOBALS['errors'][] = 'Image couldn\'t be resized because it wasn\'t a valid image.'; return false; }
+
+    if (($w <= $max_width) && ($h <= $max_height)) { return $image; } //no resizing needed
+    
+    //try max width first...
+    $ratio = $max_width / $w;
+    $new_w = $max_width;
+    $new_h = $h * $ratio;
+    
+    //if that didn't work
+    if ($new_h > $max_height) {
+        $ratio = $max_height / $h;
+        $new_h = $max_height;
+        $new_w = $w * $ratio;
+    }
+    
+    $new_image = imagecreatetruecolor ($new_w, $new_h);
+    imagecopyresampled($new_image,$image, 0, 0, 0, 0, $new_w, $new_h, $w, $h);
+    return $new_image;
+}
+////////////////resize to max width only
+function width_tumb($imgSrc,$max_width) {
+    $image = imagecreatefromjpeg($imgSrc);
+    $w = imagesx($image); //current width
+    $h = imagesy($image); //current height
+    //calculate the image ratio
+    //$imgratio=$w/$h;
+    $newwidth = $max_width;
+    if ($w>=$max_width){
+        $ratio = $w/$max_width;
+        $newheight = $h/$ratio;
+    } else{
+        $ratio = $max_width/$w;
+        $newheight = $h*$ratio;
+    }
+     $new_image = imagecreatetruecolor($newwidth,$newheight);
+     imagecopyresampled($new_image, $image, 0, 0, 0, 0, $newwidth, $newheight, $w, $h);
+     return $new_image;
+}
+
+//from http://snipplr.com/view/14278/dirify/
+//This is an improvement of Adam Kalsey's port to PHP of Movable Type's dirification function written in Perl. http://kalsey.com/2004/07/dirifyinphp/
+//added to cleanup category names and make them usable as links might use to do clean urls in future
+//or perhaps we can do with just spaces??
+function dirify($s)
+	{
+	$s = str_replace('&amp;',' ',$s);       ## convert ampersant to space
+	$s = convert_high_ascii($s);            ## convert high-ASCII chars to 7bit.
+	$s = strtolower($s);                    ## lower-case.
+	$s = strip_tags($s);                    ## remove HTML tags.
+	$s = preg_replace('!&[^;\s]+;!','',$s); ## remove HTML entities.
+	$s = preg_replace('![^\w\s-]!','',$s);  ## remove non-word/space/hyphen chars
+	$s = preg_replace('!\s+!','-',$s);      ## change space chars to dash
+	$s = preg_replace('/-+/','-',$s);       ## reduce multiple dashes to one
+	$s = preg_replace('/_+/','_',$s);       ## reduce multiple underscores to one
+	$s = trim($s,'-_');                     ## trim spaces, tabs, underscores, dashes from beginning & end
+	
+    return $s;
+	}
+
+function convert_high_ascii($s)
+	{
+ 	$HighASCII = array(
+ 		"!\xc0!" => 'A',    # A`
+ 		"!\xe0!" => 'a',    # a`
+ 		"!\xc1!" => 'A',    # A'
+ 		"!\xe1!" => 'a',    # a'
+ 		"!\xc2!" => 'A',    # A^
+ 		"!\xe2!" => 'a',    # a^
+ 		"!\xc4!" => 'Ae',   # A:
+ 		"!\xe4!" => 'ae',   # a:
+ 		"!\xc3!" => 'A',    # A~
+ 		"!\xe3!" => 'a',    # a~
+ 		"!\xc8!" => 'E',    # E`
+ 		"!\xe8!" => 'e',    # e`
+ 		"!\xc9!" => 'E',    # E'
+ 		"!\xe9!" => 'e',    # e'
+ 		"!\xca!" => 'E',    # E^
+ 		"!\xea!" => 'e',    # e^
+ 		"!\xcb!" => 'Ee',   # E:
+ 		"!\xeb!" => 'ee',   # e:
+ 		"!\xcc!" => 'I',    # I`
+ 		"!\xec!" => 'i',    # i`
+ 		"!\xcd!" => 'I',    # I'
+ 		"!\xed!" => 'i',    # i'
+ 		"!\xce!" => 'I',    # I^
+ 		"!\xee!" => 'i',    # i^
+ 		"!\xcf!" => 'Ie',   # I:
+ 		"!\xef!" => 'ie',   # i:
+ 		"!\xd2!" => 'O',    # O`
+ 		"!\xf2!" => 'o',    # o`
+ 		"!\xd3!" => 'O',    # O'
+ 		"!\xf3!" => 'o',    # o'
+ 		"!\xd4!" => 'O',    # O^
+ 		"!\xf4!" => 'o',    # o^
+ 		"!\xd6!" => 'Oe',   # O:
+ 		"!\xf6!" => 'oe',   # o:
+ 		"!\xd5!" => 'O',    # O~
+ 		"!\xf5!" => 'o',    # o~
+ 		"!\xd8!" => 'Oe',   # O/
+ 		"!\xf8!" => 'oe',   # o/
+ 		"!\xd9!" => 'U',    # U`
+ 		"!\xf9!" => 'u',    # u`
+ 		"!\xda!" => 'U',    # U'
+ 		"!\xfa!" => 'u',    # u'
+ 		"!\xdb!" => 'U',    # U^
+ 		"!\xfb!" => 'u',    # u^
+ 		"!\xdc!" => 'Ue',   # U:
+ 		"!\xfc!" => 'ue',   # u:
+ 		"!\xc7!" => 'C',    # ,C
+ 		"!\xe7!" => 'c',    # ,c
+ 		"!\xd1!" => 'N',    # N~
+ 		"!\xf1!" => 'n',    # n~
+ 		"!\xdf!" => 'ss');
+		
+	$find = array_keys($HighASCII);
+	$replace = array_values($HighASCII);
+	$s = preg_replace($find,$replace,$s);
+	return $s;
+	}
 ?>

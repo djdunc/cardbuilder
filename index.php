@@ -48,10 +48,10 @@ function show_error($h2, $body, $type="404"){
     switch($type){
         case '503':
         header("503 Service Unavailable");
-        $title = "Private event, you must login to access contents";
+        $title = "Private event, please login to access contents";
         default:
         header("Status: 404 Not Found");
-        $title = "Private event, you must login to access contents";
+        $title = "Private event, please login to access contents";
     }
 	require_once('includes/header.php');
     require_once('includes/404.php');
@@ -59,11 +59,18 @@ function show_error($h2, $body, $type="404"){
 if ($_SESSION['event_name']){
 	//we have event, safe to display any page
     if ($_SESSION['event_private'] && empty($_SESSION['user'])){
-        //do login
-		$title = "Private event, you must login to access contents";
-		require_once('includes/header.php');
-        require_once('includes/login.php');
-        require_once('includes/footer.php');
+        //do login or register
+        if($page=='register'){
+            // display the registration form
+            require_once('includes/header.php');
+            require_once('includes/register.php');
+            require_once('includes/footer.php');
+        } else{
+            $title = "Private event, please login to access contents";
+    		require_once('includes/header.php');
+            require_once('includes/login.php');
+            require_once('includes/footer.php');
+        }
     } else {
         //do required page
         switch($page){
@@ -232,15 +239,25 @@ if ($_SESSION['event_name']){
                        require_once('includes/login.php');
                        require_once('includes/footer.php');
                 }else{
-                    $events_json = callAPI("event?owner=".$_SESSION['user']->id);
-                    if (isset($events_json)) {
-                        $events = json_decode($events_json);
-                        require_once('includes/header.php');
-                        require_once('includes/admin.php');
-                        require_once('includes/footer.php');
-                   } else{
-                    //404 error
-                    show_error("Sorry, there was a problem loading the event.", "Please try again later.","503");
+                    if(is('admin')){
+                        $params = 'include_owner=true&include_card_count=true&type=1';
+                        if(!is('super')) $params .= '&owner='.$_SESSION['user']->id;
+                    
+                        var_dump($params);
+                	    $events_json = callAPI("event?".$params);
+                    
+                        //$events_json = callAPI("event?type=1");
+                        if (isset($events_json)) {
+                            $events = json_decode($events_json);
+                            require_once('includes/header.php');
+                            require_once('includes/admin.php');
+                            require_once('includes/footer.php');
+                       } else{
+                        //404 error
+                        show_error("Sorry, there was a problem loading the event.", "Please try again later.","503");
+                        }
+                    }else{
+                        show_error("Sorry, you must be an admin to view this page.", "","");
                     }
                    
                 }
@@ -254,18 +271,22 @@ if ($_SESSION['event_name']){
                      require_once('includes/login.php');
                      require_once('includes/footer.php');
                 } else{
-                     if(isset($_GET['edit_event'])){
-                         $edit_event_id = $_GET['edit_event'];
-                     }
-                     if (isset($edit_event_id)) {
-                         $edit_event_json = callAPI("event/get?id=".$edit_event_id);
-                         if (isset($edit_event_json)){$edit_event = json_decode($edit_event_json);}
-                         $event_cards_json = callAPI("card?event_id=".$edit_event_id);
-                         if (isset($event_cards_json)&&$event_cards_json!='[]') {$event_cards = json_decode($event_cards_json);}
-                     }
-                     require_once('includes/header.php');
-                     require_once('includes/form.php');
-                     require_once('includes/footer.php');
+                     if(is('admin')){
+                         if(isset($_GET['edit_event'])){
+                             $edit_event_id = $_GET['edit_event'];
+                         }
+                         if (isset($edit_event_id)) {
+                             $edit_event_json = callAPI("event/get?id=".$edit_event_id);
+                             if (isset($edit_event_json)){$edit_event = json_decode($edit_event_json);}
+                             $event_cards_json = callAPI("card?event_id=".$edit_event_id);
+                             if (isset($event_cards_json)&&$event_cards_json!='[]') {$event_cards = json_decode($event_cards_json);}
+                         }
+                         require_once('includes/header.php');
+                         require_once('includes/form.php');
+                         require_once('includes/footer.php');
+                      }else{
+                             show_error("Sorry, you must be an admin to view this page.", "","");
+                         }
              }
              break;
              default:

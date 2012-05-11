@@ -1,5 +1,5 @@
  <link rel="stylesheet" href="assets/css/jquery-ui/jquery-ui-1.8.16.custom.css" type="text/css" media="all" />
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
  <?php if ($card_id==0){  ?>
  <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
  <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/branches/dev/ui/jquery.ui.button.js"></script>
@@ -18,6 +18,7 @@
       var steep = ["social","technological","economic","environmental","political"];
       var event_id = "<?php echo $_SESSION['event_id']; ?>";
       var card_id = "<?php echo $card_id; ?>";
+      var card_img = "<?php if (isset($card->image)){ echo ($card->image); } else{ echo(''); } ?>";
       var card_owner = '<?php if (isset($card->owner)){ echo ($card->owner); } else{ echo(''); } ?>';
       function create_card_front(){
            if (card_owner!='1'){
@@ -46,6 +47,23 @@
              window.location.href = 'index.php?do=view&card_id='+card_id;
              return false;
         }
+        //display a confirmation box
+	    function confirmDelete() {
+            var deleteitem = confirm("Are you sure you want to delete this item?"); 
+            //if the user presses the "OK" button delete
+            if (deleteitem){
+                var action = 'controller=card&action=delete&id='+card_id;
+                $.post('includes/load.php', action, function(data) {
+                       alert('Card deleted');
+                       window.location.href = 'index.php';
+                       return false;
+                 }).error(function() { alert("There was a problem deleting this item, please try again later."); })
+            }
+        }
+        function trashcard(){
+            confirmDelete();
+            return false;
+        }
       $(document).ready(function() { 
           if (card_id!="0"){
                   togglebuttons("Card saved.");
@@ -73,15 +91,21 @@
                    cancel    : 'Cancel',
                    submit    : 'OK',
                    tooltip   : 'Click to edit...',
+                   onblur : 'ignore',
                    submitdata : function() {
                            togglebuttons("Saving...");
-                           return {controller:'card', card_id : card_id };
+                           return {controller:'card', card_id : card_id,orig: this.revert};
                    },
                    data: function(value) {
                        return (value);
                    },
                    callback: function(value, settings) { 
-                      create_card_front();
+                   if (value!=this.revert){
+                          create_card_front();
+                      } else{
+                          alert("Title is required");
+                          togglebuttons("Inspiration saved.");
+                      }
                    }
                });
               $('#factoid').editable(base_url+'includes/load_jeditable.php',{
@@ -91,15 +115,19 @@
                   submit    : 'OK',
                   rows:'4',
                   placeholder : "Add Factoid (5)",
+                   onblur : 'ignore',
                   submitdata : function() {
                           togglebuttons("Saving...");
                           return {controller:'card', card_id : card_id };
                   },
                   data: function(value) {
-                    return (value == 'Add Factoid (5)') ? '' : value;
+                  var retval = value.replace(/<br[\s\/]?>/gi, '');
+                    return (value == 'Add Factoid (5)') ? '' : retval;
                   },
                   callback: function(value, settings) { 
                       var completed = (value != '') ? $("#fact_info").addClass("completed") : $("#fact_info").removeClass("completed");
+                      var retval = value.replace(/\n/gi, '<br />\n'); 
+                      $(this).html(retval);
                       create_card_front();
                    }
               }); 
@@ -112,13 +140,13 @@
                   cancel    : 'Cancel',
                   submit : "OK",
                   style  : "inherit",
-
+                  onblur : 'ignore',
                   submitdata : function() {
                       togglebuttons("Saving...");
                       return {controller:'card', id:"category_id",card_id : card_id};
                   },
                   callback: function(value, settings) {
-                      var newcat = data[value].toLowerCase();
+                      var newcat = data[parseInt(value)].toLowerCase();
                       $(this).html(newcat);
                       $(this).parent().removeClass().addClass('category '+newcat);
                       $(this).val(value);
@@ -132,6 +160,7 @@
                        submit    : 'Upload',
                        cancel    : 'Cancel',
                        tooltip   : "Click to upload...",
+                       onblur : 'ignore',
                        submitdata : function() {
                            togglebuttons("Saving...");
                            return {card_id : card_id};
@@ -258,7 +287,7 @@
 			<a id="viewcard" href="#" onClick="viewcard()" class="button blue small">View card</a> <a href="#" onClick="trashcard()" class="button red small">Move to trash</a>
 			</span>
 			<span class="buttons-disab">
-			<p href="#" class="button disabled small">View card</p> <?php if(isset($card_id)){ ?><p href="" class="button disabled small">Move to trash</p><?php } ?>
+			<p href="#" class="button disabled small">Finish edit</p> <?php if(isset($card_id)){ ?><p href="" class="button disabled small">Move to trash</p><?php } ?>
 			</span>
 		</div>
 	</div>
