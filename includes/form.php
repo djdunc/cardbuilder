@@ -55,20 +55,20 @@
                                 <label>
                                     <input type="hidden" name="auto_close" value="false" />
                                     <input type="checkbox" name="auto_close" value="true" <?php if(isset($edit_event) && $edit_event->auto_close){echo 'checked';}?> class="editable" /> Close event automatically after end date</label></p>
-							  <p class="check-pair">
-							      <label>
-							    <input type="hidden" name="allow_anon" value="false" />
-							    <input type="checkbox" name="allow_anon" value="true" <?php if(isset($edit_event) && $edit_event->allow_anon){echo 'checked';}?> class="editable" />
-							    Allow anonymous card submissions
-							    </label>
-							</p>
-							 <p class="check-pair">
- 							      <label>
- 							    <input type="hidden" name="auto_publish" value="false" />
-							    <input type="checkbox" name="auto_publish" value="true" <?php if(isset($edit_event) && $edit_event->auto_publish){echo 'checked';}?> class="editable" />
-							    Auto-publish submitted cards
-							</label>
-							</p>
+							  <!-- <p class="check-pair">
+							                                   <label>
+							                                 <input type="hidden" name="allow_anon" value="false" />
+							                                 <input type="checkbox" name="allow_anon" value="true" <?php if(isset($edit_event) && $edit_event->allow_anon){echo 'checked';}?> class="editable" />
+							                                 Allow anonymous card submissions
+							                                 </label>
+							                             </p> -->
+							 <!-- <p class="check-pair">
+							                                   <label>
+							                                 <input type="hidden" name="auto_publish" value="false" />
+							                                 <input type="checkbox" name="auto_publish" value="true" <?php if(isset($edit_event) && $edit_event->auto_publish){echo 'checked';}?> class="editable" />
+							                                 Auto-publish submitted cards
+							                             </label>
+							                             </p> -->
 						</div>
 						<!-- Pass Field -->
 						<label class="align-left" for="password">
