@@ -54,7 +54,7 @@ $(document).ready(function() {
                       $('#login').show();
                       $('#indicator').remove();
                   }
-            }).error(function() { displayAlertMessage("Bad username/password combination"); $('#indicator').remove(); }, "json")
+            }).error(function() { displayAlertMessage("Bad username/password combination"); $('#login').show(); $('#indicator').remove(); }, "json")
       }
       return false;
     });
@@ -99,6 +99,12 @@ $(document).ready(function() {
 						<span>Password<strong class="red">*</strong></span>
 						<input class="textbox required editable" name="password" id="password" type="password" value="" />
 					</label>
+					<?php if ($_SESSION['event_private']){ ?>
+					<label class="align-left" for="code">
+                    	<span>Event code<strong class="red">*</strong></span>
+                    	<input class="textbox required editable" name="code" id="code" type="text" value="" />
+                    </label>
+                    <?php } ?>
 						<!-- Buttons -->
 						<div class="non-label-section">
 						    <div class="buttons">

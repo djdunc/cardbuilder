@@ -7,7 +7,14 @@ if ($_POST) {
     foreach ($_POST as $key => $value) {
         if ($key == 'controller' || $key == 'action') {
             $$key = $value;
-        } else {   
+        } else {
+            if ($_SESSION['event_private'] && $key == 'code'){
+                if ($_SESSION['event_private'] != $value){
+                    echo('Incorrect event code, please try again.');
+                    die;
+                }
+               
+            }
             $options[$key]=$value;
         }
     }
