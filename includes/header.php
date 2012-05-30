@@ -65,8 +65,8 @@
 	<div id="eyebrow-navigation">
 	    <div class="container_4">
         <div class="grid-wrap">
-            <div class="grid_2">
-	        <a class="home" href="<?php echo BASE_URL;?>"><span class="tab">create</span><span>drivers of change</span></a>
+            <div class="grid_2 home">
+	          <a href="<?php echo BASE_URL;?>" class="tab">create</a><span>drivers of change</span>
 	        </div>
 	        <div class="grid_2 align_right">
 	            <div class="user_nav">

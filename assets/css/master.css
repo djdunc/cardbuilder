@@ -150,26 +150,23 @@ body {
 	height: 36px;
 	padding-top: 4px;
 }
-#eyebrow-navigation a.home{
+
+#eyebrow-navigation .home a.tab{
+	background-color: #fff;
+	color: #000;
 	display: block;
 	float: left;
-	padding: 0;
+	padding: 9px 10px 12px;
 }
-#eyebrow-navigation a.home span{
+
+#eyebrow-navigation .home span{
 	color: #fff;
 	display: block;
 	float: left;
 	padding: 9px 10px 12px;
 }
 
-#eyebrow-navigation a.home span.tab{
-	background-color: #fff;
-	color: #000;
-}
-#eyebrow-navigation a.home:hover span{
-	color: #90b1d4;
-}
-#eyebrow-navigation a.home:hover span.tab{
+#eyebrow-navigation a.tab:hover{
 	color: #266eaa;
 }
 #eyebrow-navigation .user_nav{
