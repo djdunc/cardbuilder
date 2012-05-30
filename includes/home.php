@@ -10,7 +10,7 @@ $(document).ready(function() {
     <div id="page-heading" class="clearfix">
     	<div class="page-wrap">
 		<?php echo nl2br($event->description) ?>
-        <p>Login to <a href="create.php">create a card</a> or <a href="explore.php">explore the cards</a> other groups have created in our galleries.</p>
+        <p>Login to <a href="create.php">create a card</a> or <a href="index.php?do=explore">explore the cards</a> other groups have created in our galleries.</p>
     </div>
 </div>
 </div>
