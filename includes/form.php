@@ -244,12 +244,6 @@
          handleFormChanged();
     });
     
-    //automatically apend url on name change
-    $('#name').keyup(function () {
-     var value = $(this).val();
-     $('#url').val(baseurl + value);
-    });
-    
     //set value of private on password change
     $('#password').keyup(function() {
      var value = $(this).val();
