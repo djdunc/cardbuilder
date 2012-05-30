@@ -18,7 +18,7 @@ if(empty($_SESSION['event_id'])||$page=='home'){
         if (isset($event)) { 
             $_SESSION['event_id'] = $event->id;
             $_SESSION['event_name'] = $event->name;
-            $_SESSION['event_private']= $event->private;
+            $_SESSION['event_private']= $event->password;
             $_SESSION['event_owner'] = $event->owner;
             unset($_SESSION['org']);
             $owner_json = callAPI('user?id='.$event->owner);
